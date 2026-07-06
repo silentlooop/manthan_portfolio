@@ -66,6 +66,7 @@ function App() {
         </div>
 
         {/* Art */}
+        {/*
         <div className="z-15">
           <div className="w-full px-5 mt-16 max-w-5xl mx-auto">
             <h2 className="text-base font-mono text-gray-500 uppercase tracking-widest mb-8 whitespace-nowrap">
@@ -74,6 +75,7 @@ function App() {
           </div>
           <ArtGrid />
         </div>
+        */}
 
         {/* Footer */}
         <div className="z-15 mt-12">
