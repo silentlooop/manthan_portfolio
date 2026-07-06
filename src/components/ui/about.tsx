@@ -4,6 +4,8 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import type { Variants } from "framer-motion";
 import { SectionPrompt, SectionReveal } from "./terminal-effects";
+import AsciiArt from "./ascii-art";
+import { portraitLines } from "../../data/portrait";
 
 // --- HELPERS ---
 
@@ -248,7 +250,6 @@ function About() {
     }, [totalUnits]);
 
     const commandVisible = Math.max(0, Math.min(typedUnits, command.length));
-    const cursorActive = typedUnits < totalUnits;
 
     const getVisibleCharsForSegment = (segmentIndex: number) => {
         let offset = command.length;
@@ -262,18 +263,18 @@ function About() {
     };
 
     return (
-        <div id="about" className="min-h-screen bg-[#111111]">
+        <div id="about" className="bg-[#111111]">
 
-            <main className="flex flex-col items-center justify-start bg-[#111111] text-white font-sfmono relative z-10 pt-24 animate-in fade-in duration-1000 pb-20">
+            <main className="flex flex-col items-center justify-start bg-[#111111] text-white font-sfmono relative z-10 pt-24 animate-in fade-in duration-1000 pb-8">
 
                 <div className="w-full px-5 max-w-5xl mx-auto">
                     {/* Trajectory Section */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start mb-32">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start mb-4">
                         <SectionReveal className="space-y-8" itemClassName="">
                             <div className="font-mono text-sm text-zinc-500 flex items-center gap-2" aria-live="polite">
                                 <span className="text-zinc-600">manthan@portfolio:~$</span>
                                 <span className="text-zinc-400">{command.slice(0, commandVisible)}</span>
-                                {cursorActive && <span className="inline-block h-4 w-2 bg-zinc-400 animate-pulse align-middle" />}
+
                             </div>
 
                             <div className="space-y-6">
@@ -288,16 +289,15 @@ function About() {
                             </div>
                         </SectionReveal>
 
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.95, filter: "blur(20px)" }}
-                            whileInView={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-                            transition={{ duration: 1, delay: 0.2 }}
-                            viewport={{ once: true }}
-                            className="relative aspect-square md:aspect-[3/4] rounded-2xl overflow-hidden bg-neutral-900 border border-white/5 group"
-                        >
-                            <img src="https://framerusercontent.com/images/b9ayqjyFJxYrxbpev1rjq1HOk.jpg" alt="Manthan Portrait" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-in-out" />
-                            <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-transparent to-transparent opacity-60" />
-                        </motion.div>
+                        <div className="flex justify-end overflow-hidden">
+                            <AsciiArt
+                                lines={portraitLines}
+                                fontSize={32}
+                                color="#ffffff"
+                                dimColor="#999999"
+                                staggerMs={35}
+                            />
+                        </div>
                     </div>
 
                     {/* Terminal-style Experience Section */}

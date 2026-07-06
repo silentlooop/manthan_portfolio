@@ -174,10 +174,7 @@ export default function Shaped() {
                         exit_code: 0
                     </p>
 
-                    {/* Ghost cursors blinking at different rates */}
-                    <span className="absolute top-[18%] right-[15%] text-2xl font-sfmono animate-blink-slow">—</span>
-                    <span className="absolute bottom-[35%] left-[3%] text-xl font-sfmono animate-blink-slow" style={{ animationDelay: "0.5s" }}>▋</span>
-                    <span className="absolute top-[55%] right-[5%] text-lg font-sfmono animate-blink-slow" style={{ animationDelay: "1.2s" }}>_</span>
+
 
                     {/* Vertical pipe decorations */}
                     <div className="absolute top-[12%] left-[48%] font-sfmono text-white opacity-[0.035] text-xs leading-tight whitespace-pre">

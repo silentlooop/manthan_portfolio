@@ -54,16 +54,16 @@ function App() {
   return (
     <>
       <NavBar />
-      <div className="min-h-screen flex flex-col bg-[#111111] text-gray-200 scale-100 relative overflow-hidden">
+      <div className="flex flex-col bg-[#111111] text-gray-200 scale-100 relative overflow-hidden">
 
         {/* About section */}
-        <div className="z-15 mb-[-10px]">
+        <div className="z-15 mb-0">
           <About />
         </div>
 
         {/* Projects */}
         <div id="work" className="z-15 w-full">
-          <div className="w-full px-5 mt-20 max-w-5xl mx-auto">
+          <div className="w-full px-5 mt-4 max-w-5xl mx-auto">
             <SectionPrompt command="cd ./selected-work" className="mb-6" />
           </div>
           <ProjectsGrid />

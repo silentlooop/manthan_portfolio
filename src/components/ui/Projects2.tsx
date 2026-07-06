@@ -124,7 +124,7 @@ const ProjectsGrid: React.FC = () => {
   ];
 
   return (
-    <div className="w-full bg-[#111111] py-10 pt-4">
+    <div className="w-full bg-[#111111] py-4 pt-2">
       <div className="max-w-5xl mx-auto px-5">
         <SectionReveal className="columns-1 sm:columns-2 md:columns-2 gap-4 group/grid" itemClassName="break-inside-avoid">
           {projectCards}
@@ -158,7 +158,7 @@ const ArtGrid: React.FC = () => {
   ];
 
   return (
-    <div className="w-full bg-[#111111] py-10 pt-4">
+    <div className="w-full bg-[#111111] py-4 pt-2">
       <div className="max-w-5xl mx-auto px-5">
         <div className="columns-1 sm:columns-2 lg:columns-3 gap-5">
           {artItems.map((item) => (

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 
-function usePrefersReducedMotion() {
+export function usePrefersReducedMotion() {
     const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
     useEffect(() => {
@@ -21,7 +21,7 @@ function usePrefersReducedMotion() {
     return prefersReducedMotion;
 }
 
-function useInViewOnce(threshold = 0.25, rootMargin = "0px 0px -10% 0px") {
+export function useInViewOnce(threshold = 0.25, rootMargin = "0px 0px -10% 0px") {
     const ref = useRef<HTMLDivElement | null>(null);
     const [isInView, setIsInView] = useState(false);
 
