@@ -14,7 +14,6 @@ function AsciiArt({
   lines,
   fontSize = 12,
   color = "#ffffff",
-  dimColor = "#999999",
   staggerMs = 30,
   label,
 }: AsciiArtProps) {
