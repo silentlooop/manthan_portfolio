@@ -4,7 +4,6 @@ import { useEffect } from "react"
 
 import { ProjectsGrid } from "./components/ui/Projects2"
 import { About, NavBar } from "./components/ui/about"
-import GithubContributions from "./components/ui/GithubContributions"
 
 function App() {
   useEffect(() => {
@@ -64,11 +63,6 @@ function App() {
         {/* Projects */}
         <div className="z-15 ">
           <ProjectsGrid />
-        </div>
-
-        {/* GitHub Contributions */}
-        <div className="z-15 mb-10">
-          <GithubContributions />
         </div>
 
         {/* Footer */}
