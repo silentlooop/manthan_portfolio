@@ -1,5 +1,5 @@
 import { NavBar } from "../components/ui/about";
-import { SectionHeader, SectionPrompt, SectionReveal } from "../components/ui/terminal-effects";
+import { SectionPrompt, SectionReveal } from "../components/ui/terminal-effects";
 
 const BLOGS = [
     {
