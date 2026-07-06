@@ -2,7 +2,7 @@
 
 import { useEffect } from "react"
 
-import { ProjectsGrid } from "./components/ui/Projects2"
+import { ProjectsGrid, ArtGrid } from "./components/ui/Projects2"
 import { About, NavBar } from "./components/ui/about"
 
 function App() {
@@ -65,6 +65,16 @@ function App() {
           <ProjectsGrid />
         </div>
 
+        {/* Art */}
+        <div className="z-15">
+          <div className="w-full px-5 mt-16 max-w-5xl mx-auto">
+            <h2 className="text-base font-mono text-gray-500 uppercase tracking-widest mb-8 whitespace-nowrap">
+              // art
+            </h2>
+          </div>
+          <ArtGrid />
+        </div>
+
         {/* Footer */}
         <div className="z-15 mt-12">
           <footer className="flex flex-col items-center body bg-[#1C1C1C] dot-grid z-[1] w-full sticky bottom-0 text-zinc-100 font-sfmono">
@@ -78,7 +88,7 @@ function App() {
                   <span className="inline-flex items-center gap-1 text-zinc-500 transition-colors hover:text-white">
                     <a className="cursor-pointer border-b border-dotted border-transparent px-[2px] pt-[2px] transition-colors hover:border-current" target="_blank" rel="noreferrer" href="https://www.linkedin.com/in/manthan-p-6457b3313">Linkedin</a><sup className="font-sfmono leading-[0] text-[12px] font-light text-current">↗</sup>
                   </span>
-                  
+
                   <span className="inline-flex items-center gap-1 text-zinc-500 transition-colors hover:text-white">
                     <a className="cursor-pointer border-b border-dotted border-transparent px-[2px] pt-[2px] transition-colors hover:border-current" target="_blank" rel="noreferrer" href="https://x.com/null_rejected">Twitter</a><sup className="font-sfmono leading-[0] text-[12px] font-light text-current">↗</sup>
                   </span>

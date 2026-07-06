@@ -118,4 +118,52 @@ const ProjectsGrid: React.FC = () => {
   );
 };
 
+interface ArtItem {
+  imageSrc: string;
+  imageAlt: string;
+}
+
+const ArtGrid: React.FC = () => {
+  const artItems: ArtItem[] = [
+    {
+      imageSrc: "/details_img/art/Rohit Sharma.png",
+      imageAlt: "Art piece one",
+    },
+    
+    {
+      imageSrc: "/details_img/art/zhao_lusi.png",
+      imageAlt: "Art piece four",
+    },
+    {
+      imageSrc: "/details_img/art/iphone%20poster_%202.52.51%E2%80%AFPM.png",
+      imageAlt: "Art piece three",
+    },
+  ];
+
+  return (
+    <div className="w-full bg-[#111111] py-10 pt-4">
+      <div className="max-w-5xl mx-auto px-5">
+        <div className="columns-1 sm:columns-2 lg:columns-3 gap-5">
+          {artItems.map((item) => (
+            <div
+              key={item.imageSrc}
+              className="group/card block mb-5 break-inside-avoid w-full bg-[#111111] transition-opacity duration-500 ease-in-out opacity-100 hover:opacity-90"
+              style={{ fontFamily: '"SF Mono", "Space Mono", "Menlo", "Monaco", "Consolas", "Liberation Mono", "Courier New", monospace' }}
+            >
+              <article className="overflow-hidden rounded-sm border border-[#232323] bg-[#0f0f0f]">
+                <img
+                  src={item.imageSrc}
+                  alt={item.imageAlt}
+                  className="w-full h-auto object-contain transition-transform duration-500 group-hover/card:scale-[1.01]"
+                />
+              </article>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
 export { ProjectsGrid };
+export { ArtGrid };

@@ -24,25 +24,25 @@ function TerminalExperience() {
     ];
 
     return (
-        <div className="bg-[#111111] rounded-md p-5 font-mono text-[15px] text-gray-200 border border-white/5 max-w-2xl mx-auto">
+        <div className="bg-[#111111] rounded-md p-5 font-mono text-[15px] text-gray-300 border border-white/5 max-w-3xl mx-auto">
             <div className="mb-4 flex items-center gap-2">
                 <span className="h-2.5 w-2.5 rounded bg-red-500 inline-block"></span>
                 <span className="h-2.5 w-2.5 rounded bg-yellow-500 inline-block"></span>
                 <span className="h-2.5 w-2.5 rounded bg-green-500 inline-block"></span>
-                <span className="ml-3 text-gray-500 text-xs">manthan@portfolio:~$</span>
+                <span className="ml-3 text-gray-600 text-xs">manthan@portfolio:~$</span>
             </div>
             <div className="space-y-6">
                 {experiences.map((exp, idx) => (
                     <div key={exp.company}>
                         <div className="flex flex-wrap items-center gap-2">
-                            <span className="text-gray-400">$</span>
-                            <span className="text-gray-300">cat</span>
-                            <span className="text-gray-500">./experience/{exp.company.replace(/\s/g, '').toLowerCase()}</span>
-                            <span className="text-gray-600 ml-2 text-xs">[{exp.period}]</span>
+                            <span className="text-gray-500">$</span>
+                            <span className="text-gray-400">cat</span>
+                            <span className="text-white">./experience/{exp.company.replace(/\s/g, '').toLowerCase()}</span>
+                            <span className="text-gray-700 ml-2 text-xs">[{exp.period}]</span>
                         </div>
                         <div className="pl-6 mt-1">
-                            <span className="text-gray-500">role:</span> <span className="text-gray-200">{exp.role}</span><br />
-                            <span className="text-gray-500">desc:</span> <span className="text-gray-200">{exp.desc}</span>
+                            <span className="text-gray-600">role:</span> <span className="text-white">{exp.role}</span><br />
+                            <span className="text-gray-600">desc:</span> <span className="text-gray-400">{exp.desc}</span>
                         </div>
                         {idx !== experiences.length - 1 && <div className="border-b border-white/5 my-4" />}
                     </div>
@@ -100,9 +100,6 @@ function NavBar() {
                     <a href="/#work" onClick={(e) => scrollToSection(e, 'work')} className="hover:text-white transition-colors cursor-pointer">work</a>
                     <a href="/blogs" className="hover:text-white transition-colors cursor-pointer">blogs</a>
                     <a href="/shaped" className="hover:text-white transition-colors cursor-pointer">~/me</a>
-                    <a href="https://drive.google.com/drive/folders/1BJFK9gJ529U1H1FGIO8SsF8avREJUg-r?usp=sharing" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors flex items-center gap-1">
-                        resume <span className="text-[10px]">↗</span>
-                    </a>
                 </div>
 
                 {/* Mobile Menu Toggle (Hamburger / Close) */}
@@ -149,15 +146,6 @@ function NavBar() {
                                 className="text-xl font-semibold text-gray-500 tracking-tight font-sfmono"
                             >
                                 ~/me
-                            </motion.a>
-                            <motion.a
-                                custom={3}
-                                variants={linkVariants}
-                                href="https://drive.google.com/drive/folders/1BJFK9gJ529U1H1FGIO8SsF8avREJUg-r?usp=sharing"
-                                target="_blank"
-                                className="text-xl font-semibold text-gray-500 tracking-tight font-sfmono"
-                            >
-                                resume
                             </motion.a>
                         </div>
                     </motion.div>

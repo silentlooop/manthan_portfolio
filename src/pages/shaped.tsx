@@ -128,7 +128,7 @@ export default function Shaped() {
                 }
                 .shaped-card:hover {
                     transform: rotate(0deg) translateY(-4px);
-                    border-color: rgba(253, 224, 71, 0.35);
+                    border-color: rgba(75, 85, 99, 0.9);
                 }
                 @media (max-width: 767px) {
                     .shaped-card { transform: none !important; }
@@ -142,9 +142,7 @@ export default function Shaped() {
                 {/* ── Background decorative layer ── */}
                 <div className="absolute inset-0 pointer-events-none select-none overflow-hidden z-0">
                     {/* Large ghost text */}
-                    <p className="absolute top-[6%] left-[5%] text-5xl md:text-7xl font-sfmono text-white opacity-[0.025] whitespace-nowrap">
-                        things-that-shaped-me
-                    </p>
+
                     <p className="absolute top-[32%] right-[2%] text-3xl md:text-5xl font-sfmono text-white opacity-[0.03] whitespace-nowrap rotate-[-3deg]">
                         &gt; compiling personality...
                     </p>
@@ -209,7 +207,7 @@ export default function Shaped() {
                             style={{ animationDelay: `${0.25 + i * 0.1}s`, animationFillMode: "forwards" }}
                         >
                             <div
-                                className="shaped-card h-full bg-[#0d0d0d] border border-gray-800 p-5 md:p-6 rounded-md shadow-[0_2px_16px_rgba(0,0,0,0.5)]"
+                                className="shaped-card h-full bg-[#0b0b0b] border border-[#262626] p-5 md:p-6 rounded-md shadow-[0_1px_3px_rgba(0,0,0,0.22)]"
                                 style={{ "--card-rotation": `${item.rotation}deg` } as React.CSSProperties}
                             >
                                 {item.media && <CardMedia media={item.media} mediaType={item.mediaType} title={item.title} />}
@@ -233,7 +231,7 @@ export default function Shaped() {
                             style={{ animationDelay: `${0.5 + i * 0.1}s`, animationFillMode: "forwards" }}
                         >
                             <div
-                                className="shaped-card h-full bg-[#0d0d0d] border border-gray-800 p-5 md:p-6 rounded-md shadow-[0_2px_16px_rgba(0,0,0,0.5)]"
+                                className="shaped-card h-full bg-[#0b0b0b] border border-[#262626] p-5 md:p-6 rounded-md shadow-[0_1px_3px_rgba(0,0,0,0.22)]"
                                 style={{ "--card-rotation": `${item.rotation}deg` } as React.CSSProperties}
                             >
                                 {item.media && <CardMedia media={item.media} mediaType={item.mediaType} title={item.title} />}
@@ -259,7 +257,7 @@ export default function Shaped() {
                             style={{ animationDelay: `${0.8 + i * 0.1}s`, animationFillMode: "forwards" }}
                         >
                             <div
-                                className="shaped-card h-full bg-[#0d0d0d] border border-gray-800 p-5 md:p-6 rounded-md shadow-[0_2px_16px_rgba(0,0,0,0.5)]"
+                                className="shaped-card h-full bg-[#0b0b0b] border border-[#262626] p-5 md:p-6 rounded-md shadow-[0_1px_3px_rgba(0,0,0,0.22)]"
                                 style={{ "--card-rotation": `${item.rotation}deg` } as React.CSSProperties}
                             >
                                 {item.media && <CardMedia media={item.media} mediaType={item.mediaType} title={item.title} />}

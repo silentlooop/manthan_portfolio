@@ -47,15 +47,6 @@ function NavBar() {
           <Link to="/shaped" className="hover:text-white transition-colors">
             ~/me
           </Link>
-
-          <a
-            href="https://drive.google.com/file/d/1P4QbR-jHs0EQ5KOlh4zUSthVKtwps-iQ/view?usp=sharing"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-white transition-colors flex items-center gap-1"
-          >
-            resume <span className="text-[10px]">↗</span>
-          </a>
         </div>
 
         {/* Mobile Menu Toggle */}
@@ -104,17 +95,6 @@ function NavBar() {
                 onClick={() => setIsOpen(false)}
               >
                 ~/me
-              </motion.a>
-              <motion.a
-                custom={3}
-                variants={linkVariants}
-                href="https://drive.google.com/file/d/1P4QbR-jHs0EQ5KOlh4zUSthVKtwps-iQ/view?usp=sharing"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-xl font-semibold text-gray-500 tracking-tight font-sfmono"
-                onClick={() => setIsOpen(false)}
-              >
-                resume
               </motion.a>
             </div>
           </motion.div>
