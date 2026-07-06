@@ -29,7 +29,7 @@ const Blogs = () => {
                             <span className="ml-3 text-gray-400 text-xs">manthan@portfolio:~/blogs$</span>
                         </div>
 
-                        <div className="font-mono text-sm text-gray-500 mb-4">$ ls ./blogs</div>
+                        
                         <SectionReveal className="space-y-2">
                             {sortedBlogs.map((blog) => (
                                 <a
@@ -58,8 +58,8 @@ const Blogs = () => {
                             ))}
                         </SectionReveal>
 
-                        <div className="mt-6 flex items-center gap-2 text-gray-500 text-sm">
-                            <span>manthan@portfolio:~/blogs$</span>
+                        <div className="mt-3 flex items-center gap-2 text-gray-500 text-sm">
+                            
                             
                         </div>
                     </div>
