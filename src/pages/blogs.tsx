@@ -1,16 +1,10 @@
-import { motion } from "framer-motion";
-import type { Variants } from "framer-motion";
 import { NavBar } from "../components/ui/about";
-
-const fadeInUp: Variants = {
-    hidden: { opacity: 0, y: 40, filter: "blur(10px)" },
-    visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.8, ease: "easeOut" } },
-};
+import { SectionHeader, SectionPrompt, SectionReveal } from "../components/ui/terminal-effects";
 
 const BLOGS = [
     {
-        slug: "the-boy-who-wouldnt-shut-up",
-        title: "The Boy Who Wouldn't Shut Up",
+        slug: "the boy who wouldn't shut up",
+        title: "",
         date: "2025-09-24",
         url: "https://medium.com/@pattedamanthan/the-boy-who-wouldnt-shut-up-15f1eb4406f5"
     }
@@ -22,62 +16,54 @@ const Blogs = () => {
     return (
         <>
             <NavBar />
-            <div className="min-h-screen bg-[#111111] text-white font-sfmono py-24 px-5 md:px-20 max-w-5xl mx-auto">
-                <motion.div
-                    className="mb-12"
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, margin: "-100px" }}
-                    variants={fadeInUp}
-                >
-                    <h2 className="text-base text-gray-500 mb-8 uppercase tracking-widest">
-                        // blog posts
-                    </h2>
+            <div className="min-h-screen bg-[#111111] text-white font-sfmono pt-24 pb-20">
+                <div className="w-full px-5 max-w-5xl mx-auto">
+                    <SectionPrompt command="cat ./blogs" className="mb-6" />
+                    
+
                     <div className="bg-[#111111] rounded-md p-6 border border-white/10 shadow-sm shadow-white/5">
-                    {/* Terminal Header */}
-                    <div className="mb-6 flex items-center gap-2">
-                        <span className="h-2.5 w-2.5 rounded bg-red-500/80 inline-block"></span>
-                        <span className="h-2.5 w-2.5 rounded bg-yellow-500/80 inline-block"></span>
-                        <span className="h-2.5 w-2.5 rounded bg-green-500/80 inline-block"></span>
-                        <span className="ml-3 text-gray-400 text-xs">manthan@portfolio:~/blogs$</span>
-                    </div>
+                        <div className="mb-6 flex items-center gap-2">
+                            <span className="h-2.5 w-2.5 rounded bg-red-500/80 inline-block" />
+                            <span className="h-2.5 w-2.5 rounded bg-yellow-500/80 inline-block" />
+                            <span className="h-2.5 w-2.5 rounded bg-green-500/80 inline-block" />
+                            <span className="ml-3 text-gray-400 text-xs">manthan@portfolio:~/blogs$</span>
+                        </div>
 
-                    {/* Blog List */}
-                    <div className="space-y-6">
-                        {sortedBlogs.map((blog, idx) => (
-                            <a
-                                key={blog.slug}
-                                href={blog.url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="block group hover:opacity-100 transition-all"
-                                style={{ textDecoration: "none" }}
-                            >
-                                <div className="flex flex-col gap-1">
-                                    <div className="flex items-center gap-2">
-                                        <span className="text-green-500/70 text-sm group-hover:text-green-400 transition-colors">→</span>
-                                        <span className="text-gray-200 group-hover:text-white group-hover:drop-shadow-[0_0_4px_rgba(255,255,255,0.2)] transition-all">
-                                            {blog.title}
-                                        </span>
+                        <div className="font-mono text-sm text-gray-500 mb-4">$ ls ./blogs</div>
+                        <SectionReveal className="space-y-2">
+                            {sortedBlogs.map((blog) => (
+                                <a
+                                    key={blog.slug}
+                                    href={blog.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="group block rounded border border-transparent px-2 py-2 transition-colors hover:border-white/10 hover:bg-white/[0.02]"
+                                    style={{ textDecoration: "none" }}
+                                >
+                                    <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
+                                        <div className="flex items-center gap-2 min-w-0">
+                                            <span className="text-gray-600 text-sm">-</span>
+                                            <span className="truncate text-gray-100 group-hover:text-white">
+                                                {blog.slug}.md
+                                            </span>
+                                        </div>
+                                        <div className="pl-4 sm:pl-0 text-xs text-gray-500 shrink-0">
+                                            {blog.date}
+                                        </div>
                                     </div>
-                                    <div className="pl-4 text-xs text-gray-500">
-                                        {blog.date}
+                                    <div className="pl-6 text-sm text-gray-400 group-hover:text-gray-300 mt-1">
+                                        {blog.title}
                                     </div>
-                                </div>
-                                {idx !== sortedBlogs.length - 1 && (
-                                    <div className="border-b border-white/10 my-3" />
-                                )}
-                            </a>
-                        ))}
-                    </div>
+                                </a>
+                            ))}
+                        </SectionReveal>
 
-                    {/* Terminal Prompt */}
-                    <div className="mt-6 flex items-center gap-2 text-gray-500 text-sm">
-                        <span>manthan@portfolio:~/blogs$</span>
-                        <span className="w-1.5 h-5 bg-green-500/60 animate-pulse"></span>
+                        <div className="mt-6 flex items-center gap-2 text-gray-500 text-sm">
+                            <span>manthan@portfolio:~/blogs$</span>
+                            
+                        </div>
                     </div>
-                    </div>
-                </motion.div>
+                </div>
             </div>
         </>
     );

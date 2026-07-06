@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { NavBar } from "../components/ui/about";
+import { SectionPrompt, SectionReveal } from "../components/ui/terminal-effects";
 
 // --- TYPES ---
 
@@ -111,6 +112,26 @@ const terminalFragments = [
     { text: "$ tree --depth 1 ~/shaped", delay: 0.9 },
 ];
 
+// --- ShapedCard Component ---
+
+function ShapedCard({ item }: { item: ShapedItem }) {
+    return (
+        <div className={`${item.span}`}>
+            <div
+                className="shaped-card h-full bg-[#0b0b0b] border border-[#262626] p-5 md:p-6 rounded-md shadow-[0_1px_3px_rgba(0,0,0,0.22)]"
+                style={{
+                    "--card-rotation": `${item.rotation}deg`,
+                } as React.CSSProperties}
+            >
+                {item.media && <CardMedia media={item.media} mediaType={item.mediaType} title={item.title} />}
+                <span className="text-[11px] text-gray-500 font-sfmono tracking-wider uppercase">{item.type}</span>
+                <h3 className="text-xl md:text-2xl font-bold text-white mt-2 font-sfmono leading-snug tracking-tight">{item.title}</h3>
+                <p className="text-[15px] text-gray-400 mt-2.5 leading-relaxed font-sfmono">{item.description}</p>
+            </div>
+        </div>
+    );
+}
+
 // --- COMPONENT ---
 
 export default function Shaped() {
@@ -137,7 +158,7 @@ export default function Shaped() {
 
             <NavBar />
 
-            <main className="pt-24 pb-20 px-5 max-w-5xl mx-auto relative">
+            <main className="pt-24 pb-20 px-5 max-w-5xl mx-auto relative text-white font-sfmono">
 
                 {/* ── Background decorative layer ── */}
                 <div className="absolute inset-0 pointer-events-none select-none overflow-hidden z-0">
@@ -176,114 +197,81 @@ export default function Shaped() {
                 </div>
 
                 {/* ── Terminal Window Bar ── */}
-                <div className="relative z-[1] border border-[#2a2a2a] rounded-lg overflow-hidden bg-[#0a0a0a]/50  mb-10 opacity-0 animate-fade-in-up" style={{ animationDelay: "0.05s", animationFillMode: "forwards" }}>
+                <SectionPrompt command="cat ./me/about" className="relative z-[1] mb-6" />
+                
+
+                <SectionReveal className="relative z-[1] border border-[#2a2a2a] rounded-lg overflow-hidden bg-[#0a0a0a]/50 mb-10">
                     <div className="flex items-center gap-2 px-4 py-3">
                         <span className="w-3 h-3 rounded-full bg-[#FF5F57] shrink-0" />
                         <span className="w-3 h-3 rounded-full bg-[#FFBD2E] shrink-0" />
                         <span className="w-3 h-3 rounded-full bg-[#28C840] shrink-0" />
                         <span className="ml-3 text-sm text-gray-400 font-sfmono truncate">
                             manthan@life ~ % things-that-shaped-me
-                            <span className="inline-block w-[10px] ml-1 animate-blink text-white">▋</span>
+                            
                         </span>
                     </div>
                     <div className="border-t border-[#2a2a2a]" />
-                </div>
+                </SectionReveal>
 
                 {/* ── Terminal output line before cards ── */}
-                <div className="relative z-[1] font-sfmono text-sm text-gray-600 mb-8 ml-1 opacity-0 animate-fade-in-up" style={{ animationDelay: "0.15s", animationFillMode: "forwards" }}>
-                    <span className="text-gray-500">$</span> cat ~/memories | grep -i &apos;important&apos;
-                    <br />
+                <SectionPrompt command="cat ~/memories | grep -i 'important'" className="relative z-[1] mb-3" />
+                <div className="relative z-[1] font-sfmono text-sm text-gray-600 mb-8 ml-1">
                     <span className="text-[#fde047]/40">→ 6 results found.</span> rendering...
                 </div>
 
                 {/* ══════════ CARD GRID ══════════ */}
                 <div className="relative z-[1] grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-4">
-
-                    {/* Row 1: Card 0 (7-col) + Card 1 (5-col) */}
-                    {shapedItems.slice(0, 2).map((item, i) => (
-                        <div
-                            key={item.title}
-                            className={`${item.span} opacity-0 animate-fade-in-up`}
-                            style={{ animationDelay: `${0.25 + i * 0.1}s`, animationFillMode: "forwards" }}
-                        >
-                            <div
-                                className="shaped-card h-full bg-[#0b0b0b] border border-[#262626] p-5 md:p-6 rounded-md shadow-[0_1px_3px_rgba(0,0,0,0.22)]"
-                                style={{ "--card-rotation": `${item.rotation}deg` } as React.CSSProperties}
-                            >
-                                {item.media && <CardMedia media={item.media} mediaType={item.mediaType} title={item.title} />}
-                                <span className="text-[11px] text-gray-500 font-sfmono tracking-wider uppercase">{item.type}</span>
-                                <h3 className="text-xl md:text-2xl font-bold text-white mt-2 font-sfmono leading-snug tracking-tight">{item.title}</h3>
-                                <p className="text-[15px] text-gray-400 mt-2.5 leading-relaxed font-sfmono">{item.description}</p>
-                            </div>
-                        </div>
+                    {/* Row 1 */}
+                    {shapedItems.slice(0, 2).map((item) => (
+                        <ShapedCard key={item.title} item={item} />
                     ))}
+                </div>
 
-                    {/* ── Inline terminal fragment ── */}
-                    <div className="md:col-span-12 opacity-0 animate-fade-in-up font-sfmono text-xs md:text-sm text-gray-600/50 py-2 md:py-3 ml-1 select-none" style={{ animationDelay: "0.45s", animationFillMode: "forwards" }}>
-                        <span className="text-gray-600/30">│</span>&nbsp;&nbsp;{terminalFragments[2].text}
-                    </div>
+                {/* ── Inline terminal fragment ── */}
+                <div className="relative z-[1] font-sfmono text-xs md:text-sm text-gray-600/50 py-2 md:py-3 ml-1 select-none">
+                    <span className="text-gray-600/30">│</span>&nbsp;&nbsp;{terminalFragments[2].text}
+                </div>
 
-                    {/* Row 2: Card 2 (4-col) + Card 3 (8-col) */}
-                    {shapedItems.slice(2, 4).map((item, i) => (
-                        <div
-                            key={item.title}
-                            className={`${item.span} opacity-0 animate-fade-in-up`}
-                            style={{ animationDelay: `${0.5 + i * 0.1}s`, animationFillMode: "forwards" }}
-                        >
-                            <div
-                                className="shaped-card h-full bg-[#0b0b0b] border border-[#262626] p-5 md:p-6 rounded-md shadow-[0_1px_3px_rgba(0,0,0,0.22)]"
-                                style={{ "--card-rotation": `${item.rotation}deg` } as React.CSSProperties}
-                            >
-                                {item.media && <CardMedia media={item.media} mediaType={item.mediaType} title={item.title} />}
-                                <span className="text-[11px] text-gray-500 font-sfmono tracking-wider uppercase">{item.type}</span>
-                                <h3 className="text-xl md:text-2xl font-bold text-white mt-2 font-sfmono leading-snug tracking-tight">{item.title}</h3>
-                                <p className="text-[15px] text-gray-400 mt-2.5 leading-relaxed font-sfmono">{item.description}</p>
-                            </div>
-                        </div>
+                {/* ══════════ CARD GRID ══════════ */}
+                <div className="relative z-[1] grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-4">
+                    {/* Row 2 */}
+                    {shapedItems.slice(2, 4).map((item) => (
+                        <ShapedCard key={item.title} item={item} />
                     ))}
+                </div>
 
-                    {/* ── Inline terminal fragment ── */}
-                    <div className="md:col-span-12 opacity-0 animate-fade-in-up font-sfmono text-xs md:text-sm text-gray-600/50 py-2 md:py-3 ml-1 select-none" style={{ animationDelay: "0.7s", animationFillMode: "forwards" }}>
-                        <span className="text-gray-600/30">│</span>&nbsp;&nbsp;{terminalFragments[3].text}
-                        <br />
-                        <span className="text-gray-600/30">│</span>&nbsp;&nbsp;{terminalFragments[4].text}
-                    </div>
+                {/* ── Inline terminal fragment ── */}
+                <div className="relative z-[1] font-sfmono text-xs md:text-sm text-gray-600/50 py-2 md:py-3 ml-1 select-none">
+                    <span className="text-gray-600/30">│</span>&nbsp;&nbsp;{terminalFragments[3].text}
+                    <br />
+                    <span className="text-gray-600/30">│</span>&nbsp;&nbsp;{terminalFragments[4].text}
+                </div>
 
-                    {/* Row 3: Card 4 (5-col) + Card 5 (7-col) */}
-                    {shapedItems.slice(4, 6).map((item, i) => (
-                        <div
-                            key={item.title}
-                            className={`${item.span} opacity-0 animate-fade-in-up`}
-                            style={{ animationDelay: `${0.8 + i * 0.1}s`, animationFillMode: "forwards" }}
-                        >
-                            <div
-                                className="shaped-card h-full bg-[#0b0b0b] border border-[#262626] p-5 md:p-6 rounded-md shadow-[0_1px_3px_rgba(0,0,0,0.22)]"
-                                style={{ "--card-rotation": `${item.rotation}deg` } as React.CSSProperties}
-                            >
-                                {item.media && <CardMedia media={item.media} mediaType={item.mediaType} title={item.title} />}
-                                <span className="text-[11px] text-gray-500 font-sfmono tracking-wider uppercase">{item.type}</span>
-                                <h3 className="text-xl md:text-2xl font-bold text-white mt-2 font-sfmono leading-snug tracking-tight">{item.title}</h3>
-                                <p className="text-[15px] text-gray-400 mt-2.5 leading-relaxed font-sfmono">{item.description}</p>
-                            </div>
-                        </div>
+                {/* ══════════ CARD GRID ══════════ */}
+                <div className="relative z-[1] grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-4">
+                    {/* Row 3 */}
+                    {shapedItems.slice(4, 6).map((item) => (
+                        <ShapedCard key={item.title} item={item} />
                     ))}
                 </div>
 
                 {/* ── Terminal output after cards ── */}
-                <div className="relative z-[1] font-sfmono text-sm text-gray-500 mt-8 ml-1 space-y-1 opacity-0 animate-fade-in-up select-none" style={{ animationDelay: "1s", animationFillMode: "forwards" }}>
+                <div className="relative z-[1] font-sfmono text-sm text-gray-500 mt-8 ml-1 space-y-1 select-none">
                     <p><span className="text-gray-600">├──</span> render complete. 6 items loaded.</p>
                     <p><span className="text-gray-600">├──</span> memory_usage: 19.2% <span className="inline-block w-24 h-2 bg-[#1e1e1e] rounded-full ml-1 relative overflow-hidden"><span className="absolute inset-y-0 left-0 w-[19%] bg-[#fde047]/40 rounded-full" /></span></p>
                     <p><span className="text-gray-600">└──</span> I love spending time alone</p>
                 </div>
 
                 {/* ── Anime Terminal Log ── */}
-                <div className="relative z-[1] font-sfmono text-xs md:text-sm bg-[#0a0a0a]/60 border border-gray-800 rounded-lg p-4 mt-12 mb-4 max-w-4xl mx-auto shadow-[0_2px_16px_rgba(0,0,0,0.3)]">
+                <SectionPrompt command="cat ./me/anime" className="relative z-[1] mt-12 mb-6" />
+                
+                <div className="relative z-[1] font-sfmono text-xs md:text-sm bg-[#0a0a0a]/60 border border-gray-800 rounded-lg p-4 mb-4 max-w-4xl mx-auto shadow-[0_2px_16px_rgba(0,0,0,0.3)]">
                     <div className="flex items-center gap-2 mb-2">
                         <span className="w-2 h-2 rounded-full bg-[#FF5F57]" />
                         <span className="w-2 h-2 rounded-full bg-[#FFBD2E]" />
                         <span className="w-2 h-2 rounded-full bg-[#28C840]" />
                         <span className="ml-3 text-gray-400 font-sfmono text-xs">manthan@anime ~ % completed-anime-list</span>
-                        <span className="inline-block w-[10px] ml-1 animate-blink text-white">▋</span>
+                        
                     </div>
                     <div className="border-t border-gray-800 mb-2" />
                     <div className="pl-4 grid grid-cols-1 md:grid-cols-2 gap-x-12">
@@ -317,13 +305,13 @@ export default function Shaped() {
                 </div>
 
                 {/* ── Terminal status bar / footer ── */}
-                <div className="relative z-[1] mt-20 border-t border-[#1e1e1e] pt-4 flex flex-col md:flex-row items-center justify-between gap-2 opacity-0 animate-fade-in-up" style={{ animationDelay: "1.1s", animationFillMode: "forwards" }}>
+                <div className="relative z-[1] mt-20 border-t border-[#1e1e1e] pt-4 flex flex-col md:flex-row items-center justify-between gap-2">
                     <p className="font-sfmono text-sm text-gray-500 select-none">
                         [exit] ← type anything or press any key
                     </p>
                     <p className="font-sfmono text-sm text-gray-500 select-none">
                         manthan@life: ~/things-that-shaped-me
-                        <span className="inline-block ml-1 animate-blink text-gray-400">▋</span>
+                        
                     </p>
                 </div>
             </main>

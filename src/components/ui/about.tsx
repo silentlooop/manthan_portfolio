@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import type { Variants } from "framer-motion";
+import { SectionPrompt, SectionReveal } from "./terminal-effects";
 
 // --- HELPERS ---
 
@@ -92,7 +93,7 @@ function NavBar() {
             <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-5 py-3 md:px-6 md:py-4 bg-[#111111] border-b border-white/5 transition-all duration-300">
                 {/* Logo */}
                 <a href="/" className="text-white font-sfmono text-base md:text-lg font-bold tracking-tight hover:opacity-80 transition-opacity z-50 relative">
-                    SiL3nTL00p
+                    silentloop
                 </a>
 
                 {/* Desktop Links */}
@@ -268,7 +269,7 @@ function About() {
                 <div className="w-full px-5 max-w-5xl mx-auto">
                     {/* Trajectory Section */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start mb-32">
-                        <div className="space-y-8">
+                        <SectionReveal className="space-y-8" itemClassName="">
                             <div className="font-mono text-sm text-zinc-500 flex items-center gap-2" aria-live="polite">
                                 <span className="text-zinc-600">manthan@portfolio:~$</span>
                                 <span className="text-zinc-400">{command.slice(0, commandVisible)}</span>
@@ -285,7 +286,7 @@ function About() {
                                     );
                                 })}
                             </div>
-                        </div>
+                        </SectionReveal>
 
                         <motion.div
                             initial={{ opacity: 0, scale: 0.95, filter: "blur(20px)" }}
@@ -300,30 +301,13 @@ function About() {
                     </div>
 
                     {/* Terminal-style Experience Section */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 50 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, margin: "-100px" }}
-                        transition={{ duration: 0.8 }}
-                    >
-                        <h2 className="text-base font-mono text-gray-500 mb-12 uppercase tracking-widest">
-                            // Deep Dive: Experience
-                        </h2>
-                        <TerminalExperience />
-                    </motion.div>
-                </div>
+                    <SectionReveal className="mt-2" itemClassName="">
+                        <SectionPrompt command="cd ./deep-dive/experience" className="mb-6" />
+                        <div>
 
-                {/* --- SELECTED WORK SECTION --- */}
-                <div id="work" className="w-full px-5 mt-16 max-w-5xl mx-auto">
-                    <motion.h2
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.8 }}
-                        className="text-base font-mono text-gray-500 uppercase tracking-widest mb-8 whitespace-nowrap md:mb-[-275px]"
-                    >
-                        // selected work
-                    </motion.h2>
+                            <TerminalExperience />
+                        </div>
+                    </SectionReveal>
                 </div>
 
 

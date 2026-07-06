@@ -2,8 +2,9 @@
 
 import { useEffect } from "react"
 
-import { ProjectsGrid, ArtGrid } from "./components/ui/Projects2"
+import { ProjectsGrid } from "./components/ui/Projects2"
 import { About, NavBar } from "./components/ui/about"
+import { SectionPrompt } from "./components/ui/terminal-effects"
 
 function App() {
   useEffect(() => {
@@ -61,21 +62,14 @@ function App() {
         </div>
 
         {/* Projects */}
-        <div className="z-15 ">
+        <div id="work" className="z-15 w-full">
+          <div className="w-full px-5 mt-20 max-w-5xl mx-auto">
+            <SectionPrompt command="cd ./selected-work" className="mb-6" />
+          </div>
           <ProjectsGrid />
         </div>
 
         {/* Art */}
-        {/*
-        <div className="z-15">
-          <div className="w-full px-5 mt-16 max-w-5xl mx-auto">
-            <h2 className="text-base font-mono text-gray-500 uppercase tracking-widest mb-8 whitespace-nowrap">
-              // art
-            </h2>
-          </div>
-          <ArtGrid />
-        </div>
-        */}
 
         {/* Footer */}
         <div className="z-15 mt-12">
