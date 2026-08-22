@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { NavBar } from "../components/ui/about";
+import { NavBar } from "./about";
 import { SectionPrompt, SectionReveal } from "../components/ui/terminal-effects";
 
 // --- TYPES ---
@@ -17,13 +17,6 @@ interface ShapedItem {
 }
 
 // --- DATA ---
-// To add media to a card, add a `media` field with the URL.
-// Videos are auto-detected from .mp4/.webm/.mov extensions, or set mediaType: "video".
-//
-// Example:
-//   { ...card, media: "/details_img/interstellar.jpg" }
-//   { ...card, media: "https://example.com/clip.mp4", mediaType: "video" }
-
 const shapedItems: ShapedItem[] = [
     {
         title: "Overthinking",
@@ -46,7 +39,6 @@ const shapedItems: ShapedItem[] = [
         description: "From the emotional depth of 'A Silent Voice' to the mind-bending narrative of 'Hyouka', anime made me reconsider my beliefs.",
         rotation: -2.5,
         span: "md:col-span-7 md:row-span-1",
-        // media: "/details_img/interstellar.jpg",
     },
     {
         title: "3am debugging sessions",
@@ -69,7 +61,6 @@ const shapedItems: ShapedItem[] = [
             "I'm just trying, and most of the time failing. Just figuring things out as I go.",
         rotation: 2.5,
         span: "md:col-span-8 md:row-span-1",
-        // media: "/details_img/atomic_habits.jpg",
     },
 ];
 
@@ -103,30 +94,23 @@ function CardMedia({ media, mediaType, title }: { media: string; mediaType?: "im
     );
 }
 
-// Terminal UI fragments scattered between cards
-const terminalFragments = [
-    { text: "$ cat ~/memories | grep -i 'important'", delay: 0.3 },
-    { text: "→ 6 results found. rendering...", delay: 0.45 },
-    { text: "$ echo $PATH_TO_SELF", delay: 0.6 },
-    { text: "drwxr-xr-x  manthan  staff  experiences/", delay: 0.75 },
-    { text: "$ tree --depth 1 ~/shaped", delay: 0.9 },
-];
-
 // --- ShapedCard Component ---
 
 function ShapedCard({ item }: { item: ShapedItem }) {
     return (
         <div className={`${item.span}`}>
             <div
-                className="shaped-card h-full bg-[#0b0b0b] border border-[#262626] p-5 md:p-6 rounded-md shadow-[0_1px_3px_rgba(0,0,0,0.22)]"
+                className="shaped-card h-full overflow-hidden rounded-md border border-white/10 bg-[#141414] shadow-2xl shadow-black/20"
                 style={{
                     "--card-rotation": `${item.rotation}deg`,
                 } as React.CSSProperties}
             >
-                {item.media && <CardMedia media={item.media} mediaType={item.mediaType} title={item.title} />}
-                <span className="text-[11px] text-gray-500 font-sfmono tracking-wider uppercase">{item.type}</span>
-                <h3 className="text-xl md:text-2xl font-bold text-white mt-2 font-sfmono leading-snug tracking-tight">{item.title}</h3>
-                <p className="text-[15px] text-gray-400 mt-2.5 leading-relaxed font-sfmono">{item.description}</p>
+                <div className="p-5 md:p-6">
+                    {item.media && <CardMedia media={item.media} mediaType={item.mediaType} title={item.title} />}
+                    <span className="text-[11px] font-sfmono uppercase tracking-wider text-gray-500">{item.type}</span>
+                    <h3 className="text-xl font-bold leading-snug tracking-tight text-white md:text-2xl">{item.title}</h3>
+                    <p className="mt-2.5 font-sfmono text-[15px] leading-relaxed text-gray-400">{item.description}</p>
+                </div>
             </div>
         </div>
     );
@@ -195,83 +179,49 @@ export default function Shaped() {
 
                 {/* ── Terminal Window Bar ── */}
                 <SectionPrompt command="cat ./me/about" className="relative z-[1] mb-6" />
-                
 
-                <SectionReveal className="relative z-[1] border border-[#2a2a2a] rounded-lg overflow-hidden bg-[#0a0a0a]/50 mb-10">
-                    <div className="flex items-center gap-2 px-4 py-3">
+
+                <SectionReveal className="relative z-[1] mb-10 overflow-hidden rounded-md border border-white/10 bg-[#141414] shadow-2xl shadow-black/20">
+                    <div className="flex items-center gap-2 border-b border-white/10 bg-[#111111] px-5 py-4">
                         <span className="w-3 h-3 rounded-full bg-[#FF5F57] shrink-0" />
                         <span className="w-3 h-3 rounded-full bg-[#FFBD2E] shrink-0" />
                         <span className="w-3 h-3 rounded-full bg-[#28C840] shrink-0" />
                         <span className="ml-3 text-sm text-gray-400 font-sfmono truncate">
                             manthan@life ~ % things-that-shaped-me
-                            
+
                         </span>
                     </div>
-                    <div className="border-t border-[#2a2a2a]" />
                 </SectionReveal>
 
-                {/* ── Terminal output line before cards ── */}
-                <SectionPrompt command="cat ~/memories | grep -i 'important'" className="relative z-[1] mb-3" />
-                <div className="relative z-[1] font-sfmono text-sm text-gray-600 mb-8 ml-1">
-                    <span className="text-[#fde047]/40">→ 6 results found.</span> rendering...
-                </div>
-
                 {/* ══════════ CARD GRID ══════════ */}
-                <div className="relative z-[1] grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-4">
+                <div className="relative z-[1] grid grid-cols-1 gap-x-3 gap-y-6 md:grid-cols-12 md:gap-x-4 md:gap-y-8">
                     {/* Row 1 */}
                     {shapedItems.slice(0, 2).map((item) => (
                         <ShapedCard key={item.title} item={item} />
                     ))}
                 </div>
 
-                {/* ── Inline terminal fragment ── */}
-                <div className="relative z-[1] font-sfmono text-xs md:text-sm text-gray-600/50 py-2 md:py-3 ml-1 select-none">
-                    <span className="text-gray-600/30">│</span>&nbsp;&nbsp;{terminalFragments[2].text}
-                </div>
-
                 {/* ══════════ CARD GRID ══════════ */}
-                <div className="relative z-[1] grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-4">
+                <div className="relative z-[1] mt-6 grid grid-cols-1 gap-x-3 gap-y-6 md:mt-8 md:grid-cols-12 md:gap-x-4 md:gap-y-8">
                     {/* Row 2 */}
                     {shapedItems.slice(2, 4).map((item) => (
                         <ShapedCard key={item.title} item={item} />
                     ))}
                 </div>
 
-                {/* ── Inline terminal fragment ── */}
-                <div className="relative z-[1] font-sfmono text-xs md:text-sm text-gray-600/50 py-2 md:py-3 ml-1 select-none">
-                    <span className="text-gray-600/30">│</span>&nbsp;&nbsp;{terminalFragments[3].text}
-                    <br />
-                    <span className="text-gray-600/30">│</span>&nbsp;&nbsp;{terminalFragments[4].text}
-                </div>
-
                 {/* ══════════ CARD GRID ══════════ */}
-                <div className="relative z-[1] grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-4">
+                <div className="relative z-[1] mt-6 grid grid-cols-1 gap-x-3 gap-y-6 md:mt-8 md:grid-cols-12 md:gap-x-4 md:gap-y-8">
                     {/* Row 3 */}
                     {shapedItems.slice(4, 6).map((item) => (
                         <ShapedCard key={item.title} item={item} />
                     ))}
                 </div>
 
-                {/* ── Terminal output after cards ── */}
-                <div className="relative z-[1] font-sfmono text-sm text-gray-500 mt-8 ml-1 space-y-1 select-none">
-                    <p><span className="text-gray-600">├──</span> render complete. 6 items loaded.</p>
-                    <p><span className="text-gray-600">├──</span> memory_usage: 19.2% <span className="inline-block w-24 h-2 bg-[#1e1e1e] rounded-full ml-1 relative overflow-hidden"><span className="absolute inset-y-0 left-0 w-[19%] bg-[#fde047]/40 rounded-full" /></span></p>
-                    <p><span className="text-gray-600">└──</span> I love spending time alone</p>
-                </div>
-
                 {/* ── Anime Terminal Log ── */}
                 <SectionPrompt command="cat ./me/anime" className="relative z-[1] mt-12 mb-6" />
-                
-                <div className="relative z-[1] font-sfmono text-xs md:text-sm bg-[#0a0a0a]/60 border border-gray-800 rounded-lg p-4 mb-4 max-w-4xl mx-auto shadow-[0_2px_16px_rgba(0,0,0,0.3)]">
-                    <div className="flex items-center gap-2 mb-2">
-                        <span className="w-2 h-2 rounded-full bg-[#FF5F57]" />
-                        <span className="w-2 h-2 rounded-full bg-[#FFBD2E]" />
-                        <span className="w-2 h-2 rounded-full bg-[#28C840]" />
-                        <span className="ml-3 text-gray-400 font-sfmono text-xs">manthan@anime ~ % completed-anime-list</span>
-                        
-                    </div>
-                    <div className="border-t border-gray-800 mb-2" />
-                    <div className="pl-4 grid grid-cols-1 md:grid-cols-2 gap-x-12">
+
+                <div className="relative z-[1] mx-auto mb-4 max-w-4xl rounded-md border border-white/10 bg-[#141414] p-5 font-sfmono text-xs text-gray-300 shadow-2xl shadow-black/20 md:p-6 md:text-sm">
+                    <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-x-12">
                         <div>
                             <span className="text-gray-500">$</span> Anime Series (Top 10)
                             <br />
@@ -308,7 +258,7 @@ export default function Shaped() {
                     </p>
                     <p className="font-sfmono text-sm text-gray-500 select-none">
                         manthan@life: ~/things-that-shaped-me
-                        
+
                     </p>
                 </div>
             </main>

@@ -15,7 +15,25 @@ export const projects = [
     impact: "Achieved a Dice Coefficient of 0.85 on the validation set, successfully segmenting core tumor regions in under 2 seconds per scan.",
     nextProject: "resume-rater",
     nextProjectTitle: "Resume Rater",
-    sourceLink: "https://github.com/SiL3nTL00p/Brain_Tumor_Segmentation_BCP"
+    sourceLink: "https://github.com/silentlooop/Brain_Tumor_Segmentation_BCP"
+  },
+  {
+    slug: "probabilistic-graphic-model",
+    title: "probabilistic graphic model",
+    subtitle: "Interactive Consumer Product",
+    category: "Consumer Product • 2025",
+    role: "Developer",
+    year: "2025",
+    type: "Web Application",
+    stack: ["React", "TypeScript", "Vite", "Tailwind CSS"],
+    image: "/soc.jpeg",
+    description: "A focused consumer-facing interface built to make probabilistic ideas easier to explore.",
+    challenge: "Probabilistic models can be difficult to understand when their inputs and outcomes remain hidden behind technical notation.",
+    solution: "Designed an interactive visual interface that presents model inputs, relationships, and outcomes in a clear, approachable workflow.",
+    impact: "Created a practical way for users to explore probabilistic thinking through a responsive product experience.",
+    nextProject: "resume-rater",
+    nextProjectTitle: "Resume Rater",
+    sourceLink: ""
   },
   {
     slug: "resume-rater",
@@ -63,14 +81,14 @@ export const projects = [
     year: "2025",
     type: "Reinforcement Learning",
     stack: ["Gymnasium", "PyTorch", "Pandas", "DQN"],
-    image: "/dqn.png", 
+    image: "/dqn2.png", 
     description: "Deep Q-Learning agent designed for high-frequency trading simulations.",
     challenge: "Modeling market volatility is complex. Standard regression models fail to capture the sequential decision-making nature of trading where immediate actions affect future rewards.",
     solution: "Developed a Deep Q-Network (DQN) agent. The model takes market state vectors (MACD, RSI, Price Action) as input and outputs discrete actions (Buy, Sell, Hold). Implemented Experience Replay to stabilize training.",
     impact: "Outperformed the baseline 'Buy and Hold' strategy by 15% in backtesting on historical NIFTY 50 data during high-volatility periods.",
     nextProject: "karyogram",
     nextProjectTitle: "Karyogram",
-    sourceLink: "https://github.com/SiL3nTL00p/Kalman-Filtered-Trend-Trader-A-Deep-Reinforcement-Learning-Agent-for-Portfolio-Optimization"
+    sourceLink: "https://github.com/silentlooop/Kalman-Filtered-Trend-Trader-A-Deep-Reinforcement-Learning-Agent-for-Portfolio-Optimization"
   },
   {
     slug: "karyogram",
