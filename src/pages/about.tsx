@@ -30,7 +30,7 @@ function TerminalExperience() {
     const visibleExperiences = experiences.filter((experience) => experience.type === activeType);
 
     return (
-        <div className="w-full max-w-5xl mx-auto overflow-hidden rounded-md border border-white/10 bg-[#141414] font-mono text-[14px] text-gray-300 shadow-2xl shadow-black/20 md:text-[15px]">
+        <div className="w-full max-w-5xl mx-auto rounded-md border border-white/10 bg-[#141414] font-mono text-[14px] text-gray-300 shadow-2xl shadow-black/20 md:text-[15px]">
             <div role="tablist" aria-label="Experience types" className="flex min-w-0 items-end gap-3 border-b border-white/10 bg-[#111111] px-3 pt-2 md:px-5">
                 <div className="flex shrink-0 items-center gap-2 px-2 pb-3">
                     <span className="h-2.5 w-2.5 rounded-full bg-red-500"></span>
@@ -44,7 +44,7 @@ function TerminalExperience() {
                         role="tab"
                         aria-selected={activeType === type}
                         onClick={() => setActiveType(type)}
-                        className={`relative z-10 -mb-px flex min-w-0 flex-1 items-center rounded-t-md border-x border-t px-3 py-2.5 text-left text-xs capitalize transition-colors md:px-5 ${activeType === type ? "border-white/10 bg-[#181818] text-zinc-300" : "border-transparent bg-[#111111] text-zinc-600 hover:text-zinc-400"}`}
+                        className={`relative z-10 flex min-w-0 flex-1 items-center rounded-t-md border-x border-t px-3 py-2.5 text-left text-xs capitalize transition-colors md:px-5 ${activeType === type ? "-mb-px border-white/10 bg-[#181818] text-zinc-300" : "border-transparent bg-[#111111] text-zinc-600 hover:text-zinc-400"}`}
                     >
                         <span className="truncate">{type}</span>
                     </button>
@@ -56,12 +56,12 @@ function TerminalExperience() {
                         <div className="flex flex-wrap items-center gap-2 leading-relaxed">
                             <span className="text-gray-500">$</span>
                             <span className="text-gray-400">cat</span>
-                            <span className="break-words text-white">./experience/{exp.company.replace(/\s/g, '').toLowerCase()}</span>
-                            <span className="ml-2 text-xs text-gray-700">[{exp.period}]</span>
+                            <span className="break-all text-white">./experience/{exp.company.replace(/\s/g, '').toLowerCase()}</span>
+                            <span className="shrink-0 text-xs text-gray-700">[{exp.period}]</span>
                         </div>
                         <div className="mt-2 break-words pl-6 leading-relaxed">
                             <span className="text-gray-600">role:</span> <span className="text-white">{exp.role}</span><br />
-                            <span className="text-gray-600">desc:</span> <span className="text-gray-400">{exp.desc}</span>
+                            <span className="text-gray-600">desc:</span> <span className="text-gray-400 break-words">{exp.desc}</span>
                         </div>
                         {idx !== visibleExperiences.length - 1 && <div className="mt-6 border-b border-white/5" />}
                     </div>
@@ -83,54 +83,54 @@ function TerminalExperience() {
 
 function ContactTerminal() {
     return (
-        <div className="px-5 pb-8 pt-7 sm:px-8 sm:pb-10 sm:pt-8 md:px-12 md:pb-12 md:pt-10">
-            <div className="max-w-4xl space-y-7 font-mono">
-                <div className="flex items-center gap-2 text-sm text-zinc-500">
+        <div className="px-3 pb-6 pt-5 sm:px-5 sm:pb-8 sm:pt-7 md:px-12 md:pb-12 md:pt-10">
+            <div className="max-w-4xl space-y-5 font-mono">
+                <div className="flex min-w-0 items-center gap-2 text-xs text-zinc-500 sm:text-sm">
                     <span className="text-zinc-600">manthan@portfolio:~$</span>
-                    <span className="text-zinc-300">cat contact.txt</span>
+                    <span className="text-zinc-300 truncate">cat contact.txt</span>
                 </div>
-                <div className="space-y-3 text-[15px] leading-7 text-gray-400 md:text-base">
-                    <p className="text-2xl font-bold tracking-tight text-white md:text-3xl">Let&apos;s connect.</p>
-                    <p>Open channels for thoughtful work, curious conversations, and ambitious ideas.</p>
+                <div className="space-y-3 text-[13px] leading-6 text-gray-400 sm:text-[15px] md:text-base">
+                    <p className="text-lg font-bold tracking-tight text-white sm:text-xl md:text-2xl break-words">Let&apos;s connect.</p>
+                    <p className="break-words sm:text-base">Open channels for thoughtful work, curious conversations, and ambitious ideas.</p>
                 </div>
-                <div className="grid gap-3 border-t border-white/5 pt-6 sm:grid-cols-2">
+                <div className="grid gap-2 border-t border-white/5 pt-4 sm:gap-3 sm:border-t sm:pt-6 sm:grid-cols-2">
                     <a
                         href="https://www.linkedin.com/in/manthan-p-6457b3313"
                         target="_blank"
                         rel="noreferrer"
-                        className="group rounded-md border border-white/5 bg-[#111111] px-4 py-3 transition-colors hover:border-white/20 hover:bg-[#181818]"
+                        className="group rounded-md border border-white/5 bg-[#111111] px-3 py-2.5 transition-colors hover:border-white/20 hover:bg-[#181818] sm:px-4 sm:py-3"
                     >
-                        <span className="block text-xs text-zinc-600">network</span>
-                        <span className="mt-1 block text-sm text-gray-300 group-hover:text-white">linkedin <span className="text-zinc-600">↗</span></span>
+                        <span className="block text-[10px] text-zinc-600 sm:text-xs">network</span>
+                        <span className="mt-0.5 block text-xs text-gray-300 group-hover:text-white sm:text-sm">linkedin <span className="text-zinc-600">↗</span></span>
                     </a>
                     <a
                         href="https://x.com/null_rejected"
                         target="_blank"
                         rel="noreferrer"
-                        className="group rounded-md border border-white/5 bg-[#111111] px-4 py-3 transition-colors hover:border-white/20 hover:bg-[#181818]"
+                        className="group rounded-md border border-white/5 bg-[#111111] px-3 py-2.5 transition-colors hover:border-white/20 hover:bg-[#181818] sm:px-4 sm:py-3"
                     >
-                        <span className="block text-xs text-zinc-600">signal</span>
-                        <span className="mt-1 block text-sm text-gray-300 group-hover:text-white">twitter <span className="text-zinc-600">↗</span></span>
+                        <span className="block text-[10px] text-zinc-600 sm:text-xs">signal</span>
+                        <span className="mt-0.5 block text-xs text-gray-300 group-hover:text-white sm:text-sm">twitter <span className="text-zinc-600">↗</span></span>
                     </a>
                 </div>
-                <div className="border-t border-white/5 pt-6">
-                    <p className="mb-3 text-xs uppercase tracking-wider text-zinc-600">development</p>
-                    <div className="grid gap-3 sm:grid-cols-2">
+                <div className="border-t border-white/5 pt-4 sm:pt-6">
+                    <p className="mb-2 text-[10px] uppercase tracking-wider text-zinc-600 sm:text-xs">development</p>
+                    <div className="grid gap-2 sm:gap-3 sm:grid-cols-2">
                         <a
                             href="https://github.com/silentlooop"
                             target="_blank"
                             rel="noreferrer"
-                            className="group rounded-md border border-white/5 bg-[#111111] px-4 py-3 transition-colors hover:border-white/20 hover:bg-[#181818]"
+                            className="group rounded-md border border-white/5 bg-[#111111] px-3 py-2.5 transition-colors hover:border-white/20 hover:bg-[#181818] sm:px-4 sm:py-3"
                         >
-                            <span className="block text-xs text-zinc-600">source</span>
-                            <span className="mt-1 block text-sm text-gray-300 group-hover:text-white">github <span className="text-zinc-600">↗</span></span>
+                            <span className="block text-[10px] text-zinc-600 sm:text-xs">source</span>
+                            <span className="mt-0.5 block text-xs text-gray-300 group-hover:text-white sm:text-sm">github <span className="text-zinc-600">↗</span></span>
                         </a>
                     </div>
                 </div>
-                <div className="flex items-center gap-2 border-t border-white/5 pt-5 text-xs text-zinc-600">
+                <div className="flex flex-wrap items-center gap-2 border-t border-white/5 pt-4 text-[10px] text-zinc-600 sm:text-xs">
                     <span>status:</span>
                     <span className="text-[#fde047]">online</span>
-                    <span className="ml-auto">process: contact_ready</span>
+                    <span className="ml-auto truncate">process: contact_ready</span>
                 </div>
             </div>
         </div>
@@ -146,8 +146,8 @@ function TechLabTerminal() {
                     <span className="text-zinc-300">cat tech-lab.txt</span>
                 </div>
                 <div className="space-y-3 text-[15px] leading-7 text-gray-400 md:text-base">
-                    <p className="text-2xl font-bold tracking-tight text-white md:text-3xl">The tech lab.</p>
-                    <p>Places where I practice, experiment, and keep the feedback loop moving.</p>
+                    <p className="text-xl font-bold tracking-tight text-white sm:text-2xl md:text-3xl break-words">The tech lab.</p>
+                    <p className="break-words sm:text-base">Places where I practice, experiment, and keep the feedback loop moving.</p>
                 </div>
                 <div className="grid gap-3 border-t border-white/5 pt-6 sm:grid-cols-2">
                     <a
@@ -320,11 +320,11 @@ function About() {
 
     const trajectorySegments: TypeSegment[] = [
         {
-            className: "text-3xl md:text-4xl font-bold tracking-tight text-white",
+            className: "text-lg sm:text-2xl md:text-3xl font-bold tracking-tight text-white",
             chunks: [{ text: "The Trajectory" }]
         },
         {
-            className: "text-[15px] md:text-[16px] text-gray-400 leading-relaxed",
+            className: "text-[13px] sm:text-[14px] md:text-[15px] text-gray-400 leading-relaxed break-words",
             chunks: [
                 { text: "I synthesize " },
                 { text: "machine learning theory", className: "text-white" },
@@ -332,7 +332,7 @@ function About() {
             ]
         },
         {
-            className: "text-[15px] md:text-[16px] text-gray-400 leading-relaxed",
+            className: "text-[13px] sm:text-[14px] md:text-[15px] text-gray-400 leading-relaxed break-words",
             chunks: [
                 { text: "My work tracks an evolution from first principles to deployed code. I am driven by the " },
                 { text: "quantification of reality", className: "text-white" },
@@ -340,7 +340,7 @@ function About() {
             ]
         },
         {
-            className: "text-[15px] md:text-[16px] text-gray-400 leading-relaxed",
+            className: "text-[13px] sm:text-[14px] md:text-[15px] text-gray-400 leading-relaxed break-words",
             chunks: [
                 { text: "My current obsession? " },
                 { text: "Hacking biology with code.", className: "text-white" },
@@ -348,7 +348,7 @@ function About() {
             ]
         },
         {
-            className: "pt-4 text-gray-500 text-right",
+            className: "pt-3 text-gray-500 text-right text-xs",
             chunks: [{ text: "- manthan" }]
         },
     ];
@@ -396,7 +396,7 @@ function About() {
                     {/* Trajectory Section */}
                     <section className="min-h-[100dvh] flex flex-col justify-center py-24 md:py-28">
                         <div className="overflow-hidden rounded-md border border-white/10 bg-[#141414] shadow-2xl shadow-black/20">
-                            <div role="tablist" aria-label="Portfolio views" className="flex min-w-0 items-end gap-3 border-b border-white/10 bg-[#111111] px-3 pt-2 md:px-5">
+                            <div role="tablist" aria-label="Portfolio views" className="flex min-w-0 items-end gap-3 border-b border-white/10 bg-[#111111] px-2 pt-2 md:px-5">
                                 <div className="flex shrink-0 items-center gap-2 px-2 pb-3">
                                     <span className="h-2.5 w-2.5 rounded-full bg-red-500" />
                                     <span className="h-2.5 w-2.5 rounded-full bg-yellow-500" />
@@ -407,7 +407,7 @@ function About() {
                                     role="tab"
                                     aria-selected={activeTab === "trajectory"}
                                     onClick={() => setActiveTab("trajectory")}
-                                    className={`relative z-10 -mb-px flex min-w-0 flex-1 items-center rounded-t-md border-x border-t px-3 py-2.5 text-left text-xs transition-colors md:px-5 ${activeTab === "trajectory" ? "border-white/10 bg-[#181818] text-zinc-300" : "border-transparent bg-[#111111] text-zinc-600 hover:text-zinc-400"}`}
+                                    className={`relative z-10 flex min-w-0 flex-1 items-center rounded-t-md border-x border-t px-2 py-2 text-left text-[11px] leading-tight transition-colors md:px-5 md:text-xs ${activeTab === "trajectory" ? "-mb-px border-white/10 bg-[#181818] text-zinc-300" : "border-transparent bg-[#111111] text-zinc-600 hover:text-zinc-400"}`}
                                 >
                                     <span className="truncate">{command}</span>
                                 </button>
@@ -416,7 +416,7 @@ function About() {
                                     role="tab"
                                     aria-selected={activeTab === "contact"}
                                     onClick={() => setActiveTab("contact")}
-                                    className={`relative z-10 -mb-px flex min-w-0 flex-1 items-center rounded-t-md border-x border-t px-3 py-2.5 text-left text-xs transition-colors md:px-5 ${activeTab === "contact" ? "border-white/10 bg-[#181818] text-zinc-300" : "border-transparent bg-[#111111] text-zinc-600 hover:text-zinc-400"}`}
+                                    className={`relative z-10 flex min-w-0 flex-1 items-center rounded-t-md border-x border-t px-2 py-2 text-left text-[11px] leading-tight transition-colors md:px-5 md:text-xs ${activeTab === "contact" ? "-mb-px border-white/10 bg-[#181818] text-zinc-300" : "border-transparent bg-[#111111] text-zinc-600 hover:text-zinc-400"}`}
                                 >
                                     <span className="truncate">cat contact.txt</span>
                                 </button>
@@ -425,31 +425,31 @@ function About() {
                                     role="tab"
                                     aria-selected={activeTab === "tech-lab"}
                                     onClick={() => setActiveTab("tech-lab")}
-                                    className={`relative z-10 -mb-px flex min-w-0 flex-1 items-center rounded-t-md border-x border-t px-3 py-2.5 text-left text-xs transition-colors md:px-5 ${activeTab === "tech-lab" ? "border-white/10 bg-[#181818] text-zinc-300" : "border-transparent bg-[#111111] text-zinc-600 hover:text-zinc-400"}`}
+                                    className={`relative z-10 flex min-w-0 flex-1 items-center rounded-t-md border-x border-t px-2 py-2 text-left text-[11px] leading-tight transition-colors md:px-5 md:text-xs ${activeTab === "tech-lab" ? "-mb-px border-white/10 bg-[#181818] text-zinc-300" : "border-transparent bg-[#111111] text-zinc-600 hover:text-zinc-400"}`}
                                 >
                                     <span className="truncate">tech-lab.txt</span>
                                 </button>
                             </div>
 
                             {activeTab === "trajectory" ? <SectionReveal className="px-5 py-8 sm:px-8 sm:py-10 md:px-12 md:py-14" itemClassName="">
-                                <div className="mb-8 grid max-w-4xl">
-                                    <div className="invisible col-start-1 row-start-1" aria-hidden="true">
-                                        <div className="flex items-center gap-2 font-mono text-sm" aria-hidden="true">
+                                <div className="mb-8 grid w-full max-w-4xl min-w-0">
+                                    <div className="invisible col-start-1 row-start-1 w-full min-w-0" aria-hidden="true">
+                                        <div className="flex flex-wrap items-center gap-2 font-mono text-sm break-all" aria-hidden="true">
                                             <span>manthan@portfolio:~$</span>
                                             <span>{command}</span>
                                             <span>█</span>
                                         </div>
                                         <div className="mt-7 space-y-7">
                                             {trajectorySegments.map((segment, idx) => (
-                                                <p key={idx} className={segment.className}>
+                                                <p key={idx} className={`${segment.className} break-words`}>
                                                     {segment.chunks.map((chunk) => chunk.text).join("")}
                                                 </p>
                                             ))}
                                         </div>
                                     </div>
 
-                                    <div className="col-start-1 row-start-1" aria-live="polite">
-                                        <div className="flex items-center gap-2 font-mono text-sm text-zinc-500">
+                                    <div className="col-start-1 row-start-1 w-full min-w-0" aria-live="polite">
+                                        <div className="flex flex-wrap items-center gap-2 font-mono text-sm text-zinc-500 break-all">
                                             <span className="text-zinc-600">manthan@portfolio:~$</span>
                                             <span className="text-zinc-400">{command.slice(0, commandVisible)}</span>
                                             <span className="terminal-cursor ml-1 text-zinc-500">█</span>
@@ -458,7 +458,7 @@ function About() {
                                             {trajectorySegments.map((segment, idx) => {
                                                 const visibleChars = getVisibleCharsForSegment(idx);
                                                 return (
-                                                    <p key={idx} className={segment.className}>
+                                                    <p key={idx} className={`${segment.className} break-words`}>
                                                         {renderTypedChunks(segment.chunks, visibleChars)}
                                                     </p>
                                                 );
