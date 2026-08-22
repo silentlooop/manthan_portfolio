@@ -265,40 +265,42 @@ function About() {
     return (
         <div id="about" className="bg-[#111111]">
 
-            <main className="flex flex-col items-center justify-start bg-[#111111] text-white font-sfmono relative z-10 pt-24 animate-in fade-in duration-1000 pb-8">
+            <main className="flex flex-col items-center bg-[#111111] text-white font-sfmono relative z-10 animate-in fade-in duration-1000">
 
                 <div className="w-full px-5 max-w-5xl mx-auto">
                     {/* Trajectory Section */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start mb-4">
-                        <SectionReveal className="space-y-8" itemClassName="">
-                            <div className="font-mono text-sm text-zinc-500 flex items-center gap-2" aria-live="polite">
-                                <span className="text-zinc-600">manthan@portfolio:~$</span>
-                                <span className="text-zinc-400">{command.slice(0, commandVisible)}</span>
+                    <section className="min-h-[100dvh] flex flex-col justify-center pt-24 pb-8">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start mb-4">
+                            <SectionReveal className="space-y-8" itemClassName="">
+                                <div className="font-mono text-sm text-zinc-500 flex items-center gap-2" aria-live="polite">
+                                    <span className="text-zinc-600">manthan@portfolio:~$</span>
+                                    <span className="text-zinc-400">{command.slice(0, commandVisible)}</span>
 
+                                </div>
+
+                                <div className="space-y-6">
+                                    {trajectorySegments.map((segment, idx) => {
+                                        const visibleChars = getVisibleCharsForSegment(idx);
+                                        return (
+                                            <p key={idx} className={segment.className}>
+                                                {renderTypedChunks(segment.chunks, visibleChars)}
+                                            </p>
+                                        );
+                                    })}
+                                </div>
+                            </SectionReveal>
+
+                            <div className="flex justify-end overflow-hidden">
+                                <AsciiArt
+                                    lines={portraitLines}
+                                    fontSize={32}
+                                    color="#ffffff"
+                                    dimColor="#999999"
+                                    staggerMs={35}
+                                />
                             </div>
-
-                            <div className="space-y-6">
-                                {trajectorySegments.map((segment, idx) => {
-                                    const visibleChars = getVisibleCharsForSegment(idx);
-                                    return (
-                                        <p key={idx} className={segment.className}>
-                                            {renderTypedChunks(segment.chunks, visibleChars)}
-                                        </p>
-                                    );
-                                })}
-                            </div>
-                        </SectionReveal>
-
-                        <div className="flex justify-end overflow-hidden">
-                            <AsciiArt
-                                lines={portraitLines}
-                                fontSize={32}
-                                color="#ffffff"
-                                dimColor="#999999"
-                                staggerMs={35}
-                            />
                         </div>
-                    </div>
+                    </section>
 
                     {/* Terminal-style Experience Section */}
                     <SectionReveal className="mt-2" itemClassName="">

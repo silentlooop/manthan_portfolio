@@ -54,7 +54,7 @@ function App() {
   return (
     <>
       <NavBar />
-      <div className="flex flex-col bg-[#111111] text-gray-200 scale-100 relative overflow-hidden">
+      <div className="flex flex-col bg-[#111111] text-gray-200 scale-100 relative">
 
         {/* About section */}
         <div className="z-15 mb-0">
