@@ -15,7 +15,7 @@ function TerminalExperience() {
         {
             type: "college" as const,
             company: "AICommunity IITB",
-            period: "2025 - NOW",
+            period: "2025 - 2026",
             role: "Junior Developer",
             desc: "Working with a small team of 8 members to build AI products for insti and freelance projects. Focusing on NLP pipelines and generative models."
         },
@@ -339,25 +339,25 @@ function About() {
         {
             className: "text-[13px] sm:text-[14px] md:text-[15px] text-gray-400 leading-relaxed break-words",
             chunks: [
-                { text: "I synthesize " },
-                { text: "machine learning theory", className: "text-white" },
-                { text: " with practical engineering, solving complex puzzles through the lens of a student-builder." }
+                { text: "I build where " },
+                { text: "math meets machinery", className: "text-white" },
+                { text: ": models that learn, pipelines that ship, and interfaces people actually enjoy using." }
             ]
         },
         {
             className: "text-[13px] sm:text-[14px] md:text-[15px] text-gray-400 leading-relaxed break-words",
             chunks: [
-                { text: "My work tracks an evolution from first principles to deployed code. I am driven by the " },
-                { text: "quantification of reality", className: "text-white" },
-                { text: ", architecting systems that transcend cognitive limits." }
+                { text: "The path has wandered from soldering irons to transformers, but the loop never changes: " },
+                { text: "break it, understand it, rebuild it better", className: "text-white" },
+                { text: "." }
             ]
         },
         {
             className: "text-[13px] sm:text-[14px] md:text-[15px] text-gray-400 leading-relaxed break-words",
             chunks: [
                 { text: "My current obsession? " },
-                { text: "Hacking biology with code.", className: "text-white" },
-                { text: " I'm driven by the math behind living systems and building AI that can understand health data better than we can. It's about quantifying reality to architect systems that transcend cognitive limits." }
+                { text: "Teaching machines to imagine.", className: "text-white" },
+                { text: " I'm deep in diffusion models, watching structure emerge from pure noise, one denoising step at a time. Honestly, not a bad metaphor for figuring life out either." }
             ]
         },
         {
