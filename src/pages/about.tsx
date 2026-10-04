@@ -5,7 +5,7 @@ import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
 import type { Variants } from "framer-motion";
 import { SectionPrompt, SectionReveal } from "../components/ui/terminal-effects";
 import { TerminalHint } from "../components/ui/terminal-hint";
-import { Arrow, Measure, MeasureVertical, Note, PenScribbles, RegMark, Signature } from "../components/ui/annotations";
+import { Arrow, Measure, MeasureVertical, Note, RegMark, Signature } from "../components/ui/annotations";
 
 // --- HELPERS ---
 
@@ -405,11 +405,6 @@ function About() {
                 <div className="w-full px-5 max-w-5xl mx-auto">
                     {/* Trajectory Section */}
                     <section className="relative min-h-[100dvh] flex flex-col justify-center py-24 md:py-28">
-                        {/* Stray pen marks behind the hero */}
-                        <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-1/2 hidden w-screen -translate-x-1/2 md:block">
-                            <PenScribbles />
-                        </div>
-
                         <div className="relative">
                         {/* Annotations: proof marks + margin notes */}
                         <div aria-hidden="true" className="pointer-events-none absolute -top-9 inset-x-0 hidden items-center gap-3 md:flex">

@@ -5,7 +5,7 @@ import { useEffect } from "react"
 import { ProjectsGrid } from "./components/ui/Projects2"
 import { About, NavBar } from "./pages/about"
 import { SectionPrompt } from "./components/ui/terminal-effects"
-import { Arrow, MarginFrame, MeasureVertical, Note, Signature } from "./components/ui/annotations"
+import { Arrow, MarginFrame, MeasureVertical, Note, PageScribbles, Signature } from "./components/ui/annotations"
 import { OPEN_TERMINAL_EVENT } from "./components/ui/command-terminal"
 import { TerminalHint } from "./components/ui/terminal-hint"
 
@@ -58,6 +58,7 @@ function App() {
     <>
       <NavBar />
       <div className="flex flex-col bg-[#111111] text-gray-200 scale-100 relative">
+        <PageScribbles className="z-20" />
 
         {/* About section */}
         <div className="z-15 mb-0">

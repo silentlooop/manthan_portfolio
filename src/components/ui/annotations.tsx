@@ -165,16 +165,37 @@ export function Signature({ className = "", ink = "pencil" }: { className?: stri
     );
 }
 
-/** Faint background pen strands, like stray marks on a scanned page. */
-export function PenScribbles({ className = "" }: { className?: string }) {
+/**
+ * Page-wide grey pen strands: two long lines down the margins, joined by faint
+ * crossings, so the marks read as one continuous scrawl over the whole page.
+ * Place inside a `relative` page root.
+ */
+export function PageScribbles({ className = "" }: { className?: string }) {
+    const strands = [
+        "M70 0 C 40 60, 110 110, 80 180 C 55 240, 120 290, 90 360 C 60 430, 115 480, 75 560 C 45 620, 105 680, 85 750 C 65 820, 120 880, 80 1000",
+        "M930 0 C 960 70, 890 130, 920 200 C 950 270, 880 330, 915 400 C 945 470, 890 530, 925 610 C 955 680, 885 740, 920 820 C 950 890, 900 940, 930 1000",
+    ];
+    const crossings = [
+        "M80 180 C 300 140, 700 240, 920 200",
+        "M75 560 C 350 610, 650 510, 925 610",
+        "M85 750 C 400 810, 600 780, 920 820",
+    ];
     return (
-        <svg viewBox="0 0 1200 800" preserveAspectRatio="none" className={`h-full w-full ${className}`} fill="none" strokeLinecap="round" aria-hidden="true">
-            <path d="M520 0 C 540 60, 500 110, 548 170 C 590 222, 520 260, 560 330 C 590 380, 548 420, 575 470" stroke="#4ade80" strokeOpacity="0.29" strokeWidth="1.2" />
-            <path d="M548 170 C 600 180, 640 150, 700 176 C 740 194, 780 170, 820 190" stroke="#4ade80" strokeOpacity="0.22" strokeWidth="1" />
-            <path d="M60 210 C 140 196, 200 236, 290 214 C 340 202, 380 222, 420 210" stroke="#60a5fa" strokeOpacity="0.22" strokeWidth="1" />
-            <path d="M900 120 C 930 160, 905 190, 940 230 C 970 262, 950 300, 990 320" stroke="#60a5fa" strokeOpacity="0.18" strokeWidth="1" />
-            <path d="M1080 560 C 1040 600, 1090 640, 1050 700 C 1030 730, 1060 760, 1040 800" stroke="#4ade80" strokeOpacity="0.18" strokeWidth="1" />
-            <path d="M150 620 C 190 600, 230 650, 280 630" stroke="#f472b6" strokeOpacity="0.14" strokeWidth="1" />
+        <svg
+            viewBox="0 0 1000 1000"
+            preserveAspectRatio="none"
+            className={`pointer-events-none absolute inset-0 hidden h-full w-full lg:block ${className}`}
+            fill="none"
+            stroke="#a1a1aa"
+            strokeLinecap="round"
+            aria-hidden="true"
+        >
+            {strands.map((d) => (
+                <path key={d} d={d} strokeOpacity="0.16" strokeWidth="1.1" vectorEffect="non-scaling-stroke" />
+            ))}
+            {crossings.map((d) => (
+                <path key={d} d={d} strokeOpacity="0.07" strokeWidth="1" vectorEffect="non-scaling-stroke" />
+            ))}
         </svg>
     );
 }
