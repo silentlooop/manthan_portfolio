@@ -47,5 +47,26 @@
     background-size: 18px 18px;
     background-position: 0 0;
   }
+
+  /* Terminal hover hint (see components/ui/terminal-hint.tsx) */
+  .terminal-hint {
+    opacity: 0;
+    translate: 0 0.25rem;
+    transition:
+      opacity 200ms cubic-bezier(0, 0, 0.2, 1),
+      translate 200ms cubic-bezier(0, 0, 0.2, 1);
+  }
+
+  :hover > .terminal-hint,
+  :focus-visible > .terminal-hint {
+    opacity: 1;
+    translate: 0 0;
+  }
+
+  @media (hover: none) {
+    .terminal-hint {
+      display: none;
+    }
+  }
 }
 

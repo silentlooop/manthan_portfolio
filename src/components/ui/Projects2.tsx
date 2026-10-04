@@ -1,5 +1,6 @@
 import React from "react";
 import { SectionReveal } from "./terminal-effects";
+import { TerminalHint } from "./terminal-hint";
 
 interface ProjectCardProps {
   href?: string;
@@ -38,11 +39,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           '"SF Mono", "Space Mono", "Menlo", "Monaco", "Consolas", "Liberation Mono", "Courier New", monospace',
       }}
     >
-      <div className="pointer-events-none absolute right-3 top-3 z-10 opacity-0 translate-y-1 transition-all duration-200 ease-out md:group-hover/card:opacity-100 md:group-hover/card:translate-y-0 group-active/card:opacity-100 group-active/card:translate-y-0 group-focus/card:opacity-100 group-focus/card:translate-y-0">
-        <span className="inline-flex rounded border border-white/10 bg-black/70 px-2 py-1 text-[11px] text-gray-300 shadow-lg backdrop-blur-sm">
-          $ open ./projects/{projectSlug}
-        </span>
-      </div>
+      <TerminalHint text={`$ open ./projects/${projectSlug}`} />
       <article>
         {isVideo ? (
           <video

@@ -5,6 +5,8 @@ import { useEffect } from "react"
 import { ProjectsGrid } from "./components/ui/Projects2"
 import { About, NavBar } from "./pages/about"
 import { SectionPrompt } from "./components/ui/terminal-effects"
+import { OPEN_TERMINAL_EVENT } from "./components/ui/command-terminal"
+import { TerminalHint } from "./components/ui/terminal-hint"
 
 function App() {
   useEffect(() => {
@@ -79,6 +81,14 @@ function App() {
                 <span className="flex flex-row items-center gap-2">
                   <p className="self-center w-min px-2 pt-1 pb-[2px] font-sfmono lowercase text-zinc-400 border-zinc-400 border border-solid rounded-full">v5.0.0</p>
                   <p className="self-center px-2 pt-1 pb-[2px] font-sfmono uppercase text-zinc-500">updated 2026.08</p>
+                  <button
+                    type="button"
+                    onClick={() => window.dispatchEvent(new Event(OPEN_TERMINAL_EVENT))}
+                    className="relative self-center px-2 pt-1 pb-[2px] font-sfmono lowercase text-zinc-500 transition-colors hover:text-[#fde047]"
+                  >
+                    <kbd className="mr-1.5 rounded border border-zinc-700 px-1 text-[11px] text-zinc-400">/</kbd>open terminal
+                    <TerminalHint text="$ help" placement="below" className="!top-auto bottom-full mb-2 !mt-0" />
+                  </button>
                 </span>
                 <span className="ml-auto flex items-center gap-2 text-right text-xs uppercase tracking-wider text-zinc-600">
                   <span>built + designed by</span>

@@ -1,9 +1,10 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
 import type { Variants } from "framer-motion";
 import { SectionPrompt, SectionReveal } from "../components/ui/terminal-effects";
+import { TerminalHint } from "../components/ui/terminal-hint";
 
 // --- HELPERS ---
 
@@ -14,7 +15,7 @@ function TerminalExperience() {
         {
             type: "college" as const,
             company: "AICommunity IITB",
-            period: "2025 - NOW",
+            period: "2025 - 2026",
             role: "Junior Developer",
             desc: "Working with a small team of 8 members to build AI products for insti and freelance projects. Focusing on NLP pipelines and generative models."
         },
@@ -47,6 +48,7 @@ function TerminalExperience() {
                         className={`relative z-10 flex min-w-0 flex-1 items-center rounded-t-md border-x border-t px-3 py-2.5 text-left text-xs capitalize transition-colors md:px-5 ${activeType === type ? "-mb-px border-white/10 bg-[#181818] text-zinc-300" : "border-transparent bg-[#111111] text-zinc-600 hover:text-zinc-400"}`}
                     >
                         <span className="truncate">{type}</span>
+                        <TerminalHint text={type === "college" ? "$ make learn && make ship" : "$ hire manthan --vacancy=open"} placement="below-start" />
                     </button>
                 ))}
             </div>
@@ -98,8 +100,9 @@ function ContactTerminal() {
                         href="https://www.linkedin.com/in/manthan-p-6457b3313"
                         target="_blank"
                         rel="noreferrer"
-                        className="group rounded-md border border-white/5 bg-[#111111] px-3 py-2.5 transition-colors hover:border-white/20 hover:bg-[#181818] sm:px-4 sm:py-3"
+                        className="group relative rounded-md border border-white/5 bg-[#111111] px-3 py-2.5 transition-colors hover:border-white/20 hover:bg-[#181818] sm:px-4 sm:py-3"
                     >
+                        <TerminalHint text="$ open ./me --in-a-blazer" placement="below-start" />
                         <span className="block text-[10px] text-zinc-600 sm:text-xs">network</span>
                         <span className="mt-0.5 block text-xs text-gray-300 group-hover:text-white sm:text-sm">linkedin <span className="text-zinc-600">↗</span></span>
                     </a>
@@ -107,8 +110,9 @@ function ContactTerminal() {
                         href="https://x.com/null_rejected"
                         target="_blank"
                         rel="noreferrer"
-                        className="group rounded-md border border-white/5 bg-[#111111] px-3 py-2.5 transition-colors hover:border-white/20 hover:bg-[#181818] sm:px-4 sm:py-3"
+                        className="group relative rounded-md border border-white/5 bg-[#111111] px-3 py-2.5 transition-colors hover:border-white/20 hover:bg-[#181818] sm:px-4 sm:py-3"
                     >
+                        <TerminalHint text="$ tail -f ./unfiltered-thoughts" placement="below-start" />
                         <span className="block text-[10px] text-zinc-600 sm:text-xs">signal</span>
                         <span className="mt-0.5 block text-xs text-gray-300 group-hover:text-white sm:text-sm">twitter <span className="text-zinc-600">↗</span></span>
                     </a>
@@ -120,8 +124,9 @@ function ContactTerminal() {
                             href="https://github.com/silentlooop"
                             target="_blank"
                             rel="noreferrer"
-                            className="group rounded-md border border-white/5 bg-[#111111] px-3 py-2.5 transition-colors hover:border-white/20 hover:bg-[#181818] sm:px-4 sm:py-3"
+                            className="group relative rounded-md border border-white/5 bg-[#111111] px-3 py-2.5 transition-colors hover:border-white/20 hover:bg-[#181818] sm:px-4 sm:py-3"
                         >
+                            <TerminalHint text="$ git log --since=3am" placement="below-start" />
                             <span className="block text-[10px] text-zinc-600 sm:text-xs">source</span>
                             <span className="mt-0.5 block text-xs text-gray-300 group-hover:text-white sm:text-sm">github <span className="text-zinc-600">↗</span></span>
                         </a>
@@ -154,8 +159,9 @@ function TechLabTerminal() {
                         href="https://leetcode.com/u/silentlooop/"
                         target="_blank"
                         rel="noreferrer"
-                        className="group rounded-md border border-white/5 bg-[#111111] px-4 py-3 transition-colors hover:border-white/20 hover:bg-[#181818]"
+                        className="group relative rounded-md border border-white/5 bg-[#111111] px-4 py-3 transition-colors hover:border-white/20 hover:bg-[#181818]"
                     >
+                        <TerminalHint text="$ sudo solve --daily-humility" placement="below-start" />
                         <span className="block text-xs text-zinc-600">problem solving</span>
                         <span className="mt-1 block text-sm text-gray-300 group-hover:text-white">leetcode <span className="text-zinc-600">↗</span></span>
                     </a>
@@ -163,8 +169,9 @@ function TechLabTerminal() {
                         href="https://monkeytype.com/account"
                         target="_blank"
                         rel="noreferrer"
-                        className="group rounded-md border border-white/5 bg-[#111111] px-4 py-3 transition-colors hover:border-white/20 hover:bg-[#181818]"
+                        className="group relative rounded-md border border-white/5 bg-[#111111] px-4 py-3 transition-colors hover:border-white/20 hover:bg-[#181818]"
                     >
+                        <TerminalHint text="$ wpm --check --again" placement="below-start" />
                         <span className="block text-xs text-zinc-600">typing practice</span>
                         <span className="mt-1 block text-sm text-gray-300 group-hover:text-white">monkeytype <span className="text-zinc-600">↗</span></span>
                     </a>
@@ -194,6 +201,8 @@ const linkVariants = {
 // --- NAVIGATION COMPONENT ---
 function NavBar() {
     const [isOpen, setIsOpen] = useState(false);
+    const { scrollYProgress } = useScroll();
+    const scrollProgress = useSpring(scrollYProgress, { stiffness: 200, damping: 30, restDelta: 0.001 });
 
     // Lock body scroll when menu is open
     useEffect(() => {
@@ -219,14 +228,15 @@ function NavBar() {
             <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-5 py-3 md:px-6 md:py-4 bg-[#111111] border-b border-white/5 transition-all duration-300">
                 {/* Logo */}
                 <a href="/" className="text-white font-sfmono text-base md:text-lg font-bold tracking-tight hover:opacity-80 transition-opacity z-50 relative">
-                    silentlooop
+                    silentlooop<span className="terminal-cursor text-zinc-500">_</span>
+                    <TerminalHint text="$ cd ~/home-sweet-home" placement="below" />
                 </a>
 
                 {/* Desktop Links */}
                 <div className="hidden md:flex items-center gap-8 text-sm font-sfmono text-gray-400">
-                    <a href="/#work" onClick={(e) => scrollToSection(e, 'work')} className="hover:text-white transition-colors cursor-pointer">work</a>
-                    <a href="/blogs" className="hover:text-white transition-colors cursor-pointer">blogs</a>
-                    <a href="/shaped" className="hover:text-white transition-colors cursor-pointer">~/me</a>
+                    <a href="/#work" onClick={(e) => scrollToSection(e, 'work')} className="relative hover:text-white transition-colors cursor-pointer">work<TerminalHint text="$ ls ./proof-i-dont-just-talk" placement="below" /></a>
+                    <a href="/blogs" className="relative hover:text-white transition-colors cursor-pointer">blogs<TerminalHint text="$ cat ./thoughts --uncompiled" placement="below" /></a>
+                    <a href="/shaped" className="relative hover:text-white transition-colors cursor-pointer">~/me<TerminalHint text="$ whoami --the-human-behind-it" placement="below" /></a>
                 </div>
 
                 {/* Mobile Menu Toggle (Hamburger / Close) */}
@@ -236,6 +246,9 @@ function NavBar() {
                 >
                     {isOpen ? "✕" : "≡"}
                 </button>
+
+                {/* Scroll progress */}
+                <motion.div aria-hidden="true" className="absolute bottom-0 left-0 right-0 h-px origin-left bg-zinc-500/60" style={{ scaleX: scrollProgress }} />
             </nav>
 
             {/* FULL SCREEN MOBILE MENU OVERLAY */}
@@ -326,25 +339,25 @@ function About() {
         {
             className: "text-[13px] sm:text-[14px] md:text-[15px] text-gray-400 leading-relaxed break-words",
             chunks: [
-                { text: "I synthesize " },
-                { text: "machine learning theory", className: "text-white" },
-                { text: " with practical engineering, solving complex puzzles through the lens of a student-builder." }
+                { text: "I build where " },
+                { text: "math meets machinery", className: "text-white" },
+                { text: ": models that learn, pipelines that ship, and interfaces people actually enjoy using." }
             ]
         },
         {
             className: "text-[13px] sm:text-[14px] md:text-[15px] text-gray-400 leading-relaxed break-words",
             chunks: [
-                { text: "My work tracks an evolution from first principles to deployed code. I am driven by the " },
-                { text: "quantification of reality", className: "text-white" },
-                { text: ", architecting systems that transcend cognitive limits." }
+                { text: "The path has wandered from soldering irons to transformers, but the loop never changes: " },
+                { text: "break it, understand it, rebuild it better", className: "text-white" },
+                { text: "." }
             ]
         },
         {
             className: "text-[13px] sm:text-[14px] md:text-[15px] text-gray-400 leading-relaxed break-words",
             chunks: [
                 { text: "My current obsession? " },
-                { text: "Hacking biology with code.", className: "text-white" },
-                { text: " I'm driven by the math behind living systems and building AI that can understand health data better than we can. It's about quantifying reality to architect systems that transcend cognitive limits." }
+                { text: "Teaching machines to imagine.", className: "text-white" },
+                { text: " I'm deep in diffusion models, watching structure emerge from pure noise, one denoising step at a time. Honestly, not a bad metaphor for figuring life out either." }
             ]
         },
         {
@@ -410,6 +423,7 @@ function About() {
                                     className={`relative z-10 flex min-w-0 flex-1 items-center rounded-t-md border-x border-t px-2 py-2 text-left text-[11px] leading-tight transition-colors md:px-5 md:text-xs ${activeTab === "trajectory" ? "-mb-px border-white/10 bg-[#181818] text-zinc-300" : "border-transparent bg-[#111111] text-zinc-600 hover:text-zinc-400"}`}
                                 >
                                     <span className="truncate">{command}</span>
+                                    <TerminalHint text="$ cat ./how-i-got-here.log" placement="below-start" />
                                 </button>
                                 <button
                                     type="button"
@@ -419,6 +433,7 @@ function About() {
                                     className={`relative z-10 flex min-w-0 flex-1 items-center rounded-t-md border-x border-t px-2 py-2 text-left text-[11px] leading-tight transition-colors md:px-5 md:text-xs ${activeTab === "contact" ? "-mb-px border-white/10 bg-[#181818] text-zinc-300" : "border-transparent bg-[#111111] text-zinc-600 hover:text-zinc-400"}`}
                                 >
                                     <span className="truncate">cat contact.txt</span>
+                                    <TerminalHint text="$ ping manthan --say-hi" placement="below-start" />
                                 </button>
                                 <button
                                     type="button"
@@ -428,6 +443,7 @@ function About() {
                                     className={`relative z-10 flex min-w-0 flex-1 items-center rounded-t-md border-x border-t px-2 py-2 text-left text-[11px] leading-tight transition-colors md:px-5 md:text-xs ${activeTab === "tech-lab" ? "-mb-px border-white/10 bg-[#181818] text-zinc-300" : "border-transparent bg-[#111111] text-zinc-600 hover:text-zinc-400"}`}
                                 >
                                     <span className="truncate">tech-lab.txt</span>
+                                    <TerminalHint text="$ ./break-things --on-purpose" placement="below-start" />
                                 </button>
                             </div>
 
