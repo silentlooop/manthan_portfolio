@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { NavBar } from "./about";
 import { SectionPrompt, SectionReveal } from "../components/ui/terminal-effects";
-import { Arrow, Measure, Note, PageScribbles, RegMark, Signature } from "../components/ui/annotations";
+import { Arrow, Measure, Note, RegMark, Signature } from "../components/ui/annotations";
 
 // --- TYPES ---
 
@@ -126,7 +126,6 @@ export default function Shaped() {
 
     return (
         <div className="relative min-h-screen bg-[#111111]">
-            <PageScribbles className="z-20" />
             {/* Scoped styles */}
             <style>{`
                 .shaped-card {

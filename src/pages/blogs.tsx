@@ -1,7 +1,7 @@
 import { NavBar } from "./about";
 import { SectionPrompt, SectionReveal } from "../components/ui/terminal-effects";
 import { TerminalHint } from "../components/ui/terminal-hint";
-import { Arrow, Measure, Note, PageScribbles, RegMark, Signature } from "../components/ui/annotations";
+import { Arrow, Measure, Note, RegMark, Signature } from "../components/ui/annotations";
 
 const BLOGS = [
     {
@@ -19,7 +19,6 @@ const Blogs = () => {
         <>
             <NavBar />
             <div className="relative min-h-screen bg-[#111111] text-white font-sfmono pt-24 pb-20">
-                <PageScribbles className="z-20" />
                 <div className="relative w-full px-5 max-w-5xl mx-auto">
                     <div aria-hidden="true" className="pointer-events-none absolute left-full top-24 ml-2 hidden w-44 xl:block">
                         <Arrow variant="swoop" flip className="h-12 w-24" rotate={-10} />

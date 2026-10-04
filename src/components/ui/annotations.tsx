@@ -165,41 +165,6 @@ export function Signature({ className = "", ink = "pencil" }: { className?: stri
     );
 }
 
-/**
- * Page-wide grey pen strands: two long lines down the margins, joined by faint
- * crossings, so the marks read as one continuous scrawl over the whole page.
- * Place inside a `relative` page root.
- */
-export function PageScribbles({ className = "" }: { className?: string }) {
-    const strands = [
-        "M70 0 C 40 60, 110 110, 80 180 C 55 240, 120 290, 90 360 C 60 430, 115 480, 75 560 C 45 620, 105 680, 85 750 C 65 820, 120 880, 80 1000",
-        "M930 0 C 960 70, 890 130, 920 200 C 950 270, 880 330, 915 400 C 945 470, 890 530, 925 610 C 955 680, 885 740, 920 820 C 950 890, 900 940, 930 1000",
-    ];
-    const crossings = [
-        "M80 180 C 300 140, 700 240, 920 200",
-        "M75 560 C 350 610, 650 510, 925 610",
-        "M85 750 C 400 810, 600 780, 920 820",
-    ];
-    return (
-        <svg
-            viewBox="0 0 1000 1000"
-            preserveAspectRatio="none"
-            className={`pointer-events-none absolute inset-0 hidden h-full w-full lg:block ${className}`}
-            fill="none"
-            stroke="#a1a1aa"
-            strokeLinecap="round"
-            aria-hidden="true"
-        >
-            {strands.map((d) => (
-                <path key={d} d={d} strokeOpacity="0.16" strokeWidth="1.1" vectorEffect="non-scaling-stroke" />
-            ))}
-            {crossings.map((d) => (
-                <path key={d} d={d} strokeOpacity="0.07" strokeWidth="1" vectorEffect="non-scaling-stroke" />
-            ))}
-        </svg>
-    );
-}
-
 /** Invisible box matching the max-w-5xl content column, so margin notes can sit outside it. */
 export function MarginFrame({ children, className = "" }: { children: React.ReactNode; className?: string }) {
     return (
