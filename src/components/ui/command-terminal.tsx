@@ -243,7 +243,7 @@ export function CommandTerminal() {
                                         type="button"
                                         aria-label={dot.label}
                                         onClick={dot.action}
-                                        className={`flex h-3 w-3 items-center justify-center rounded-full ${dot.color} text-[9px] font-bold leading-none text-black/60 transition-[filter] hover:brightness-110`}
+                                        className={`flex h-2.5 w-2.5 items-center justify-center rounded-full ${dot.color} text-[7px] font-bold leading-none text-black/60 transition-[filter] hover:brightness-110`}
                                     >
                                         <span aria-hidden="true" className="opacity-0 transition-opacity group-hover/dots:opacity-100">{dot.glyph}</span>
                                     </button>
