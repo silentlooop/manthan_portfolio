@@ -5,6 +5,7 @@ import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
 import type { Variants } from "framer-motion";
 import { SectionPrompt, SectionReveal } from "../components/ui/terminal-effects";
 import { TerminalHint } from "../components/ui/terminal-hint";
+import { Arrow, Measure, MeasureVertical, Note, PenScribbles, RegMark } from "../components/ui/annotations";
 
 // --- HELPERS ---
 
@@ -407,8 +408,30 @@ function About() {
 
                 <div className="w-full px-5 max-w-5xl mx-auto">
                     {/* Trajectory Section */}
-                    <section className="min-h-[100dvh] flex flex-col justify-center py-24 md:py-28">
-                        <div className="overflow-hidden rounded-md border border-white/10 bg-[#141414] shadow-2xl shadow-black/20">
+                    <section className="relative min-h-[100dvh] flex flex-col justify-center py-24 md:py-28">
+                        {/* Stray pen marks behind the hero */}
+                        <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-1/2 hidden w-screen -translate-x-1/2 md:block">
+                            <PenScribbles />
+                        </div>
+
+                        <div className="relative">
+                        {/* Annotations: proof marks + margin notes */}
+                        <div aria-hidden="true" className="pointer-events-none absolute -top-9 inset-x-0 hidden items-center gap-3 md:flex">
+                            <span className="font-sfmono text-[10px] text-zinc-600">01</span>
+                            <Measure className="flex-1" label="984 × 640" note="fig. 01 — the trajectory" />
+                        </div>
+                        <RegMark className="pointer-events-none absolute -left-7 -top-7 hidden md:block" />
+                        <RegMark className="pointer-events-none absolute -bottom-7 -right-7 hidden md:block" />
+                        <div aria-hidden="true" className="pointer-events-none absolute right-full top-14 mr-4 hidden w-40 xl:block">
+                            <Note rotate={-8} className="pl-2">who wrote this?</Note>
+                            <Arrow variant="swoop" className="ml-10 mt-1 h-14 w-24" rotate={6} />
+                        </div>
+                        <div aria-hidden="true" className="pointer-events-none absolute bottom-10 left-full ml-4 hidden w-44 xl:block">
+                            <Arrow variant="hook" flip className="h-14 w-14" rotate={-20} />
+                            <Note rotate={5} size="sm" className="mt-1">still figuring it out… and probably always will.</Note>
+                        </div>
+
+                        <div className="relative z-10 overflow-hidden rounded-md border border-white/10 bg-[#141414] shadow-2xl shadow-black/20">
                             <div role="tablist" aria-label="Portfolio views" className="flex min-w-0 items-end gap-3 border-b border-white/10 bg-[#111111] px-2 pt-2 md:px-5">
                                 <div className="flex shrink-0 items-center gap-2 px-2 pb-3">
                                     <span className="h-2.5 w-2.5 rounded-full bg-red-500" />
@@ -489,10 +512,18 @@ function About() {
                                 </div>
                             </SectionReveal> : activeTab === "contact" ? <ContactTerminal /> : <TechLabTerminal />}
                         </div>
+                        </div>
                     </section>
 
                     {/* Terminal-style Experience Section */}
-                    <div className="mt-2 mb-6">
+                    <div className="relative mt-2 mb-6">
+                        <div aria-hidden="true" className="pointer-events-none absolute bottom-2 right-full top-20 mr-6 hidden xl:flex">
+                            <MeasureVertical label="2025 — 2026" />
+                        </div>
+                        <div aria-hidden="true" className="pointer-events-none absolute left-full top-24 ml-4 hidden w-44 xl:block">
+                            <Note rotate={-5}>same guy, more commits now.</Note>
+                            <Arrow variant="swoop" flip className="mt-1 h-12 w-24" rotate={12} delay={0.4} />
+                        </div>
                         <SectionPrompt command="cd ./deep-dive/experience" className="mb-8" startOnMount />
                         <TerminalExperience />
                     </div>
