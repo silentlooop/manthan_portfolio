@@ -28,21 +28,15 @@ const HELP = [
     "  whoami | date | echo <text> | history | clear | exit",
 ];
 
-const TIP_SEEN_KEY = "silentlooop:terminal-tip-seen";
-
-function readTipSeen() {
+// Show the tip on every refresh and on arrival from outside the site,
+// but not when moving between pages via the site's own (full-reload) links.
+function shouldShowTip() {
+    const nav = performance.getEntriesByType("navigation")[0] as PerformanceNavigationTiming | undefined;
+    if (nav?.type === "reload") return true;
     try {
-        return window.localStorage.getItem(TIP_SEEN_KEY) === "1";
+        return !document.referrer || new URL(document.referrer).origin !== window.location.origin;
     } catch {
-        return false;
-    }
-}
-
-function markTipSeen() {
-    try {
-        window.localStorage.setItem(TIP_SEEN_KEY, "1");
-    } catch {
-        // storage unavailable (private mode etc.) — the tip just shows again next visit
+        return true;
     }
 }
 
@@ -62,19 +56,18 @@ export function CommandTerminal() {
     const scrollRef = useRef<HTMLDivElement>(null);
 
     const [showTip, setShowTip] = useState(false);
-    // Persistent launcher appears once the tip has had its moment (immediately for returning visitors).
-    const [launcherReady, setLauncherReady] = useState(readTipSeen);
+    // Persistent launcher appears once the tip has had its moment (immediately when the tip is skipped).
+    const [launcherReady, setLauncherReady] = useState(() => !shouldShowTip());
     const isTouch = typeof window !== "undefined" && window.matchMedia("(hover: none)").matches;
 
     const close = useCallback(() => setOpen(false), []);
 
-    // First-visit tip so people discover the terminal; shown once, then remembered.
+    // Tip so people discover the terminal (see shouldShowTip).
     useEffect(() => {
-        if (readTipSeen()) return;
+        if (!shouldShowTip()) return;
         const showTimer = window.setTimeout(() => {
             setShowTip(true);
             setLauncherReady(true);
-            markTipSeen();
         }, 2500);
         const hideTimer = window.setTimeout(() => setShowTip(false), 14000);
         return () => {
