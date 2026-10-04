@@ -65,14 +65,34 @@ type SectionPromptProps = {
     command: string;
     className?: string;
     startOnMount?: boolean;
+    /** Optional section index ("01") shown before the prompt. */
+    index?: string;
+    /** Optional right-aligned label, joined to the prompt by a hairline rule. */
+    meta?: string;
 };
 
-export function SectionPrompt({ command, className = "", startOnMount = false }: SectionPromptProps) {
+export function SectionPrompt({ command, className = "", startOnMount = false, index, meta }: SectionPromptProps) {
     const [ref, isInView] = useInViewOnce();
+    const start = startOnMount || isInView;
+
+    if (!index && !meta) {
+        return (
+            <div ref={ref} className={className}>
+                <TypewriterLine start={start} prompt="$" text={command} cursor />
+            </div>
+        );
+    }
 
     return (
-        <div ref={ref} className={className}>
-            <TypewriterLine start={startOnMount || isInView} prompt="$" text={command} cursor />
+        <div ref={ref} className={`flex items-center gap-4 ${className}`}>
+            {index && <span className="font-mono text-[11px] tabular-nums text-zinc-600">{index}</span>}
+            <TypewriterLine start={start} prompt="$" text={command} cursor className="shrink-0" />
+            <span
+                aria-hidden="true"
+                className="h-px flex-1 origin-left bg-white/[0.07] transition-transform duration-700 ease-out"
+                style={{ transform: start ? "scaleX(1)" : "scaleX(0)" }}
+            />
+            {meta && <span className="hidden shrink-0 font-mono text-[11px] uppercase tracking-[0.14em] text-zinc-600 sm:inline">{meta}</span>}
         </div>
     );
 }

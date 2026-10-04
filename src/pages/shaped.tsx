@@ -178,7 +178,7 @@ export default function Shaped() {
                 </div>
 
                 {/* ── Terminal Window Bar ── */}
-                <SectionPrompt command="cat ./me/about" className="relative z-[1] mb-6" />
+                <SectionPrompt command="cat ./me/about" index="01" meta="things that shaped me" className="relative z-[1] mb-6" />
 
 
                 <SectionReveal className="relative z-[1] mb-10 overflow-hidden rounded-md border border-white/10 bg-[#141414] shadow-2xl shadow-black/20">
@@ -218,35 +218,37 @@ export default function Shaped() {
                 </div>
 
                 {/* ── Anime Terminal Log ── */}
-                <SectionPrompt command="cat ./me/anime" className="relative z-[1] mt-12 mb-6" />
+                <SectionPrompt command="cat ./me/anime" index="02" meta="watchlist" className="relative z-[1] mt-12 mb-6" />
 
                 <div className="relative z-[1] mx-auto mb-4 max-w-4xl rounded-md border border-white/10 bg-[#141414] p-5 font-sfmono text-xs text-gray-300 shadow-2xl shadow-black/20 md:p-6 md:text-sm">
                     <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-x-12">
                         <div>
-                            <span className="text-gray-500">$</span> Anime Series (Top 10)
-                            <br />
-                            <span className="text-[#fde047]/80">BLACK CLOVER</span><br />
-                            <span className="text-[#fde047]/80">HYOUKA</span><br />
-                            <span className="text-[#fde047]/80">FRIEREN</span><br />
-                            <span className="text-[#fde047]/80">TOKYO GHOUL</span><br />
-                            <span className="text-[#fde047]/80">NARUTO</span><br />
-                            <span className="text-[#fde047]/80">ONE PIECE</span><br />
-                            <span className="text-[#fde047]/80">BLEACH</span><br />
-                            <span className="text-[#fde047]/80">DEMON SLAYER</span><br />
-                            <span className="text-[#fde047]/80">BUNGO STRAY DOGS</span><br />
-                            <span className="text-[#fde047]/80">AOT</span><br />
+                            <p className="mb-4 text-[11px] uppercase tracking-[0.14em] text-zinc-500"><span className="text-[#fde047]">$</span> series · top 10</p>
+                            <ol className="space-y-1.5">
+                                <li className="flex gap-3"><span className="tabular-nums text-zinc-600">01</span><span className="text-zinc-300">BLACK CLOVER</span></li>
+                                <li className="flex gap-3"><span className="tabular-nums text-zinc-600">02</span><span className="text-zinc-300">HYOUKA</span></li>
+                                <li className="flex gap-3"><span className="tabular-nums text-zinc-600">03</span><span className="text-zinc-300">FRIEREN</span></li>
+                                <li className="flex gap-3"><span className="tabular-nums text-zinc-600">04</span><span className="text-zinc-300">TOKYO GHOUL</span></li>
+                                <li className="flex gap-3"><span className="tabular-nums text-zinc-600">05</span><span className="text-zinc-300">NARUTO</span></li>
+                                <li className="flex gap-3"><span className="tabular-nums text-zinc-600">06</span><span className="text-zinc-300">ONE PIECE</span></li>
+                                <li className="flex gap-3"><span className="tabular-nums text-zinc-600">07</span><span className="text-zinc-300">BLEACH</span></li>
+                                <li className="flex gap-3"><span className="tabular-nums text-zinc-600">08</span><span className="text-zinc-300">DEMON SLAYER</span></li>
+                                <li className="flex gap-3"><span className="tabular-nums text-zinc-600">09</span><span className="text-zinc-300">BUNGO STRAY DOGS</span></li>
+                                <li className="flex gap-3"><span className="tabular-nums text-zinc-600">10</span><span className="text-zinc-300">AOT</span></li>
+                            </ol>
                         </div>
                         <div>
-                            <span className="text-gray-500">$</span> Anime Movies
-                            <br />
-                            <span className="text-[#fde047]/80">THE LIGHT OF FIREFLY FOREST</span><br />
-                            <span className="text-[#fde047]/80">YOUR NAME</span><br />
-                            <span className="text-[#fde047]/80">SUZUME</span><br />
-                            <span className="text-[#fde047]/80">A SILENT VOICE</span><br />
-                            <span className="text-[#fde047]/80">5CM PER SECOND</span><br />
-                            <span className="text-[#fde047]/80">GARDEN OF WORDS</span><br />
-                            <span className="text-[#fde047]/80">NARUTO MOVIES</span><br />
-                            <span className="text-[#fde047]/80">SPY FAMILY : CODE WHITE</span><br />
+                            <p className="mb-4 text-[11px] uppercase tracking-[0.14em] text-zinc-500"><span className="text-[#fde047]">$</span> movies</p>
+                            <ol className="space-y-1.5">
+                                <li className="flex gap-3"><span className="tabular-nums text-zinc-600">01</span><span className="text-zinc-300">THE LIGHT OF FIREFLY FOREST</span></li>
+                                <li className="flex gap-3"><span className="tabular-nums text-zinc-600">02</span><span className="text-zinc-300">YOUR NAME</span></li>
+                                <li className="flex gap-3"><span className="tabular-nums text-zinc-600">03</span><span className="text-zinc-300">SUZUME</span></li>
+                                <li className="flex gap-3"><span className="tabular-nums text-zinc-600">04</span><span className="text-zinc-300">A SILENT VOICE</span></li>
+                                <li className="flex gap-3"><span className="tabular-nums text-zinc-600">05</span><span className="text-zinc-300">5CM PER SECOND</span></li>
+                                <li className="flex gap-3"><span className="tabular-nums text-zinc-600">06</span><span className="text-zinc-300">GARDEN OF WORDS</span></li>
+                                <li className="flex gap-3"><span className="tabular-nums text-zinc-600">07</span><span className="text-zinc-300">NARUTO MOVIES</span></li>
+                                <li className="flex gap-3"><span className="tabular-nums text-zinc-600">08</span><span className="text-zinc-300">SPY FAMILY : CODE WHITE</span></li>
+                            </ol>
                         </div>
                     </div>
                 </div>
@@ -254,7 +256,7 @@ export default function Shaped() {
                 {/* ── Terminal status bar / footer ── */}
                 <div className="relative z-[1] mt-20 border-t border-[#1e1e1e] pt-4 flex flex-col md:flex-row items-center justify-between gap-2">
                     <p className="font-sfmono text-sm text-gray-500 select-none">
-                        [exit] ← type anything or press any key
+                        [exit] ← press / to open the terminal
                     </p>
                     <p className="font-sfmono text-sm text-gray-500 select-none">
                         manthan@life: ~/things-that-shaped-me

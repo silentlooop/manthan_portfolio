@@ -9,13 +9,13 @@ import { TerminalHint } from "../components/ui/terminal-hint";
 
 // --- FONT STYLES ---
 const monoFont = {
-  fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
+  fontFamily: '"Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
   fontWeight: 400,
   letterSpacing: '-0.02em'
 };
 
 const displayFont = {
-  fontFamily: '"Neue Haas Unica", "IBM Plex Sans", -apple-system, BlinkMacSystemFont, sans-serif',
+  fontFamily: 'Geist, "Neue Haas Unica", "IBM Plex Sans", -apple-system, BlinkMacSystemFont, sans-serif',
   fontWeight: 700,
 };
 
@@ -64,7 +64,7 @@ const staggerContainer: Variants = {
 
 function TechBadge({ text }: { text: string }) {
   return (
-    <span className="px-3 py-1 text-[12px] text-[#fde047] border border-[#fde047]/20 bg-[#fde047]/5" style={monoFont}>
+    <span className="rounded-sm border border-white/10 bg-white/[0.03] px-2.5 py-1 text-[12px] text-zinc-300" style={monoFont}>
       {text}
     </span>
   );
@@ -112,7 +112,7 @@ export default function ProjectDetail() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="break-words text-6xl font-bold leading-none tracking-tighter text-[#EBEBF5] sm:text-7xl md:text-8xl"
+              className="break-words text-6xl font-semibold leading-[0.95] tracking-[-0.04em] text-[#EBEBF5] sm:text-7xl md:text-8xl"
               style={displayFont}
             >
               {project.title}
@@ -209,17 +209,17 @@ export default function ProjectDetail() {
           {/* Narrative */}
           <div className="min-w-0 space-y-16 md:col-span-8">
             <motion.section variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="space-y-4">
-              <motion.h2 variants={fadeInUp} className="text-[22px] font-bold text-[#EBEBF5]" style={monoFont}>The Challenge</motion.h2>
+              <motion.h2 variants={fadeInUp} className="flex items-baseline gap-4 text-[22px] font-semibold tracking-tight text-[#EBEBF5]" style={displayFont}><span className="text-[11px] font-normal tabular-nums text-zinc-600" style={monoFont}>01</span>The Challenge</motion.h2>
               <motion.p variants={fadeInUp} className="break-words text-[16px] leading-relaxed text-[#999] md:text-[17px]" style={monoFont}>{project.challenge}</motion.p>
             </motion.section>
 
             <motion.section variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="space-y-4">
-              <motion.h2 variants={fadeInUp} className="text-[22px] font-bold text-[#EBEBF5]" style={monoFont}>The Solution</motion.h2>
+              <motion.h2 variants={fadeInUp} className="flex items-baseline gap-4 text-[22px] font-semibold tracking-tight text-[#EBEBF5]" style={displayFont}><span className="text-[11px] font-normal tabular-nums text-zinc-600" style={monoFont}>02</span>The Solution</motion.h2>
               <motion.p variants={fadeInUp} className="break-words text-[16px] leading-relaxed text-[#999] md:text-[17px]" style={monoFont}>{project.solution}</motion.p>
             </motion.section>
 
             <motion.section variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="space-y-4">
-              <motion.h2 variants={fadeInUp} className="text-[22px] font-bold text-[#EBEBF5]" style={monoFont}>Impact</motion.h2>
+              <motion.h2 variants={fadeInUp} className="flex items-baseline gap-4 text-[22px] font-semibold tracking-tight text-[#EBEBF5]" style={displayFont}><span className="text-[11px] font-normal tabular-nums text-zinc-600" style={monoFont}>03</span>Impact</motion.h2>
               <motion.p variants={fadeInUp} className="break-words text-[16px] leading-relaxed text-[#999] md:text-[17px]" style={monoFont}>{project.impact}</motion.p>
             </motion.section>
           </div>
