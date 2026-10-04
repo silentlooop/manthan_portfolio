@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { projects } from "../data/projects";
 import type { Variants } from "framer-motion";
 import { NavBar } from "./about";
+import NotFound from "./not_found";
 import { TerminalHint } from "../components/ui/terminal-hint";
 
 // --- FONT STYLES ---
@@ -81,7 +82,7 @@ export default function ProjectDetail() {
   }, [slug]);
 
   if (!project) {
-    return <div className="min-h-screen flex items-center justify-center text-white">Project not found</div>;
+    return <NotFound />;
   }
 
   return (

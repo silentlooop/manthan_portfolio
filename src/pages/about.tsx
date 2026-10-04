@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
 import type { Variants } from "framer-motion";
 import { SectionPrompt, SectionReveal } from "../components/ui/terminal-effects";
 import { TerminalHint } from "../components/ui/terminal-hint";
@@ -201,6 +201,8 @@ const linkVariants = {
 // --- NAVIGATION COMPONENT ---
 function NavBar() {
     const [isOpen, setIsOpen] = useState(false);
+    const { scrollYProgress } = useScroll();
+    const scrollProgress = useSpring(scrollYProgress, { stiffness: 200, damping: 30, restDelta: 0.001 });
 
     // Lock body scroll when menu is open
     useEffect(() => {
@@ -226,7 +228,7 @@ function NavBar() {
             <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-5 py-3 md:px-6 md:py-4 bg-[#111111] border-b border-white/5 transition-all duration-300">
                 {/* Logo */}
                 <a href="/" className="text-white font-sfmono text-base md:text-lg font-bold tracking-tight hover:opacity-80 transition-opacity z-50 relative">
-                    silentlooop
+                    silentlooop<span className="terminal-cursor text-[#fde047]">_</span>
                     <TerminalHint text="$ cd ~/home-sweet-home" placement="below" />
                 </a>
 
@@ -244,6 +246,9 @@ function NavBar() {
                 >
                     {isOpen ? "✕" : "≡"}
                 </button>
+
+                {/* Scroll progress */}
+                <motion.div aria-hidden="true" className="absolute bottom-0 left-0 right-0 h-px origin-left bg-[#fde047]/70" style={{ scaleX: scrollProgress }} />
             </nav>
 
             {/* FULL SCREEN MOBILE MENU OVERLAY */}
