@@ -232,18 +232,24 @@ export function CommandTerminal() {
                 >
                     <div className="group relative overflow-hidden rounded-md border border-white/10 bg-[#141414]/95 shadow-2xl shadow-black/50 backdrop-blur-sm">
                         <div className="flex items-center gap-1.5 border-b border-white/5 bg-[#111111] px-3 py-2">
-                            <span className="h-2 w-2 rounded-full bg-zinc-700" />
-                            <span className="h-2 w-2 rounded-full bg-zinc-700" />
-                            <span className="h-2 w-2 rounded-full bg-zinc-700" />
+                            <div className="group/dots flex items-center gap-1.5">
+                                {[
+                                    { color: "bg-red-500", glyph: "×", label: "Dismiss tip", action: () => setShowTip(false) },
+                                    { color: "bg-yellow-500", glyph: "−", label: "Minimize tip", action: () => setShowTip(false) },
+                                    { color: "bg-green-500", glyph: "+", label: "Open terminal", action: () => setOpen(true) },
+                                ].map((dot) => (
+                                    <button
+                                        key={dot.label}
+                                        type="button"
+                                        aria-label={dot.label}
+                                        onClick={dot.action}
+                                        className={`flex h-3 w-3 items-center justify-center rounded-full ${dot.color} text-[9px] font-bold leading-none text-black/60 transition-[filter] hover:brightness-110`}
+                                    >
+                                        <span aria-hidden="true" className="opacity-0 transition-opacity group-hover/dots:opacity-100">{dot.glyph}</span>
+                                    </button>
+                                ))}
+                            </div>
                             <span className="ml-2 text-[10px] uppercase tracking-wider text-zinc-600">tip</span>
-                            <button
-                                type="button"
-                                aria-label="Dismiss tip"
-                                onClick={() => setShowTip(false)}
-                                className="ml-auto px-1 text-xs leading-none text-zinc-600 transition-colors hover:text-zinc-300"
-                            >
-                                ✕
-                            </button>
                         </div>
                         <button
                             type="button"
