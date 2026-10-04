@@ -5,7 +5,7 @@ import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
 import type { Variants } from "framer-motion";
 import { SectionPrompt, SectionReveal } from "../components/ui/terminal-effects";
 import { TerminalHint } from "../components/ui/terminal-hint";
-import { Arrow, Measure, MeasureVertical, Note, PenScribbles, RegMark } from "../components/ui/annotations";
+import { Arrow, Measure, MeasureVertical, Note, PenScribbles, RegMark, Signature } from "../components/ui/annotations";
 
 // --- HELPERS ---
 
@@ -361,10 +361,6 @@ function About() {
                 { text: " I'm deep in diffusion models, watching structure emerge from pure noise, one denoising step at a time. Honestly, not a bad metaphor for figuring life out either." }
             ]
         },
-        {
-            className: "pt-3 text-gray-500 text-right text-xs",
-            chunks: [{ text: "- manthan" }]
-        },
     ];
 
     const segmentLengths = trajectorySegments.map((segment) => typedLength(segment.chunks));
@@ -506,7 +502,19 @@ function About() {
                                     </div>
                                 </div>
 
-                                <div className="mt-12 flex flex-wrap items-center justify-between gap-3 border-t border-white/5 pt-5 font-mono text-xs text-zinc-600">
+                                {/* Hand-signed sign-off; space is reserved so nothing jumps when it draws in */}
+                                <div aria-hidden="true" className="flex h-24 items-end justify-end">
+                                    {typedUnits >= totalUnits && (
+                                        <div className="text-right">
+                                            <Signature className="ml-auto h-12 w-36" />
+                                            <Note rotate={-2} size="sm" ink="faint">
+                                                — manthan, {new Date().toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })}. still compiling.
+                                            </Note>
+                                        </div>
+                                    )}
+                                </div>
+
+                                <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-white/5 pt-5 font-mono text-xs text-zinc-600">
                                     <span>status: <span className="text-[#fde047]">online</span></span>
                                     <span>process: trajectory_initialized</span>
                                 </div>
