@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { projects } from "../data/projects";
 import type { Variants } from "framer-motion";
 import { NavBar } from "./about";
+import { TerminalHint } from "../components/ui/terminal-hint";
 
 // --- FONT STYLES ---
 const monoFont = {
@@ -184,8 +185,9 @@ export default function ProjectDetail() {
                   href={project.sourceLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group block w-full py-4 border-t border-b border-[#333] hover:border-[#fde047] transition-colors"
+                  className="group relative block w-full py-4 border-t border-b border-[#333] hover:border-[#fde047] transition-colors"
                 >
+                  <TerminalHint text="$ cat ./src --judge-gently" placement="below-start" />
                   <div className="flex items-center justify-between" style={monoFont}>
                     <span className="text-[13px] uppercase tracking-widest text-[#7a7770] group-hover:text-[#fde047]">
                       View Source
@@ -226,8 +228,9 @@ export default function ProjectDetail() {
         <div className="mt-40 border-t border-[#333] pt-12 pb-16 flex justify-between items-end group cursor-pointer">
           <div>
             <p className="text-[13px] text-[#7a7770] uppercase mb-2" style={monoFont}>Next Project</p>
-            <Link to={`/projects/${project.nextProject}`} className="text-3xl md:text-5xl font-bold text-white group-hover:text-[#fde047] transition-colors tracking-tight" style={displayFont}>
+            <Link to={`/projects/${project.nextProject}`} className="relative text-3xl md:text-5xl font-bold text-white group-hover:text-[#fde047] transition-colors tracking-tight" style={displayFont}>
               {project.nextProjectTitle}
+              <TerminalHint text="$ next --one-more" placement="below-start" />
             </Link>
           </div>
           <span className="text-2xl text-[#666] group-hover:translate-x-2 transition-transform duration-300">→</span>

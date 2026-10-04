@@ -1,5 +1,6 @@
 import { NavBar } from "./about";
 import { SectionPrompt, SectionReveal } from "../components/ui/terminal-effects";
+import { TerminalHint } from "../components/ui/terminal-hint";
 
 const BLOGS = [
     {
@@ -37,9 +38,10 @@ const Blogs = () => {
                                     href={blog.url}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="group block rounded border border-transparent px-2 py-2 transition-colors hover:border-white/10 hover:bg-white/[0.02]"
+                                    className="group relative block rounded border border-transparent px-2 py-2 transition-colors hover:border-white/10 hover:bg-white/[0.02]"
                                     style={{ textDecoration: "none" }}
                                 >
+                                    <TerminalHint text="$ brew coffee && cat ./blog.md" placement="below-start" />
                                     <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
                                         <div className="flex items-center gap-2 min-w-0">
                                             <span className="text-gray-600 text-sm">-</span>
