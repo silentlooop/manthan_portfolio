@@ -62,7 +62,7 @@ export function CommandTerminal() {
             setShowTip(true);
             setLauncherReady(true);
         }, 2500);
-        const hideTimer = window.setTimeout(() => setShowTip(false), 14000);
+        const hideTimer = window.setTimeout(() => setShowTip(false), 8250);
         return () => {
             window.clearTimeout(showTimer);
             window.clearTimeout(hideTimer);
@@ -269,7 +269,7 @@ export function CommandTerminal() {
                             className="absolute bottom-0 left-0 h-px w-full origin-left bg-zinc-600"
                             initial={{ scaleX: 1 }}
                             animate={{ scaleX: 0 }}
-                            transition={{ duration: 11.5, ease: "linear" }}
+                            transition={{ duration: 5.75, ease: "linear" }}
                         />
                     </div>
                 </motion.div>
