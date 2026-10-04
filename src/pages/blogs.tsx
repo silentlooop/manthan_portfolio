@@ -19,7 +19,7 @@ const Blogs = () => {
             <NavBar />
             <div className="min-h-screen bg-[#111111] text-white font-sfmono pt-24 pb-20">
                 <div className="w-full px-5 max-w-5xl mx-auto">
-                    <SectionPrompt command="cat ./blogs" index="01" meta={`${sortedBlogs.length} ${sortedBlogs.length === 1 ? "post" : "posts"}`} className="mb-6" />
+                    <SectionPrompt command="cat ./blogs" className="mb-6" />
                     
 
                     <div className="bg-[#111111] rounded-md p-6 border border-white/10 shadow-sm shadow-white/5">
@@ -60,10 +60,9 @@ const Blogs = () => {
                             ))}
                         </SectionReveal>
 
-                        <div className="mt-4 flex items-center gap-2 border-t border-white/5 px-2 pt-4 text-xs text-zinc-600">
-                            <span className="text-zinc-500">$</span>
-                            <span>more drafts compiling</span>
-                            <span className="terminal-cursor text-zinc-500">_</span>
+                        <div className="mt-3 flex items-center gap-2 text-gray-500 text-sm">
+                            
+                            
                         </div>
                     </div>
                 </div>

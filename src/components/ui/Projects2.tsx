@@ -9,11 +9,6 @@ interface ProjectCardProps {
   imageSrc: string;
   imageAlt: string;
   mediaType?: "image" | "video";
-  index?: number;
-  /** CSS object-position for the cover crop, e.g. "top". */
-  imagePosition?: string;
-  /** "contain" letterboxes media that shouldn't be cropped (e.g. wide screenshots). */
-  imageFit?: "cover" | "contain";
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
@@ -23,11 +18,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   imageSrc,
   imageAlt,
   mediaType = "image",
-  index,
-  imagePosition = "center",
-  imageFit = "cover",
 }) => {
-  const fitClass = imageFit === "contain" ? "object-contain p-6" : "object-cover";
   const Wrapper: React.ElementType = href ? "a" : "div";
   const projectSlug = href?.split("/").filter(Boolean).pop() ?? title.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 
@@ -41,20 +32,19 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   return (
     <Wrapper
       href={href}
-      className="group/card relative block overflow-hidden rounded-md border border-white/[0.06] bg-[#141414] transition-colors duration-300 hover:border-white/15"
+      className="group/card block mb-4 break-inside-avoid bg-[#111111] transition-opacity duration-500 ease-in-out opacity-100 hover:opacity-75 relative px-0.5 py-0.5"
       {...(href ? { target: "_self", rel: "noopener noreferrer" } : {})}
       style={{
         fontFamily:
-          '"Geist Mono", "SF Mono", "Space Mono", "Menlo", "Monaco", "Consolas", "Liberation Mono", "Courier New", monospace',
+          '"SF Mono", "Space Mono", "Menlo", "Monaco", "Consolas", "Liberation Mono", "Courier New", monospace',
       }}
     >
       <TerminalHint text={`$ open ./projects/${projectSlug}`} />
-      <article className="relative aspect-[16/10] overflow-hidden bg-[#0d0d0d]">
+      <article>
         {isVideo ? (
           <video
             src={imageSrc}
-            className={`h-full w-full ${fitClass} brightness-[0.92] transition-[transform,filter] duration-700 ease-out group-hover/card:scale-[1.03] group-hover/card:brightness-100`}
-            style={{ objectPosition: imagePosition }}
+            className="w-full h-auto object-contain"
             autoPlay
             loop
             muted
@@ -64,28 +54,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           <img
             src={imageSrc}
             alt={imageAlt}
-            loading="lazy"
-            className={`h-full w-full ${fitClass} brightness-[0.92] transition-[transform,filter] duration-700 ease-out group-hover/card:scale-[1.03] group-hover/card:brightness-100`}
-            style={{ objectPosition: imagePosition }}
+            className="w-full h-auto object-contain"
           />
         )}
       </article>
-      <div className="flex items-start justify-between gap-4 border-t border-white/[0.06] px-4 py-3.5">
-        <div className="flex min-w-0 items-baseline gap-3">
-          {index !== undefined && (
-            <span className="shrink-0 text-[11px] tabular-nums text-zinc-600">{String(index).padStart(2, "0")}</span>
-          )}
-          <div className="min-w-0">
-            <div className="truncate text-[15px] font-semibold tracking-tight text-white">{title}</div>
-            <div className="mt-1 truncate text-[11px] uppercase tracking-[0.12em] text-zinc-500">{category}</div>
-          </div>
-        </div>
-        <span
-          aria-hidden="true"
-          className="shrink-0 text-sm text-zinc-600 transition-[color,transform] duration-300 group-hover/card:-translate-y-0.5 group-hover/card:translate-x-0.5 group-hover/card:text-white"
-        >
-          ↗
-        </span>
+      <div className="pt-2 pb-3 px-3">
+        <div className="font-semibold text-white text-base">{title}</div>
+        <div className="text-zinc-500 text-xs mt-[2px]">{category}</div>
       </div>
     </Wrapper>
   );
@@ -95,7 +70,6 @@ const ProjectsGrid: React.FC = () => {
   const projectCards = [
     <ProjectCard
       key="btsp"
-      index={1}
       href="/projects/btsp"
       title="BTSP"
       category="BIOX-WNCC PROJECT"
@@ -104,8 +78,6 @@ const ProjectsGrid: React.FC = () => {
     />,
     <ProjectCard
       key="pgm"
-      index={2}
-      imagePosition="top"
       href="/projects/probabilistic-graphic-model"
       title="PROBABILISTIC GRAPHIC MODEL"
       category="CONSUMER PRODUCT"
@@ -114,7 +86,6 @@ const ProjectsGrid: React.FC = () => {
     />,
     <ProjectCard
       key="resume-rater"
-      index={3}
       href="/projects/resume-rater"
       title="RESUME RATER"
       category="AI MODEL"
@@ -124,8 +95,6 @@ const ProjectsGrid: React.FC = () => {
     />,
     <ProjectCard
       key="wids"
-      index={4}
-      imageFit="contain"
       href="/projects/wids-25"
       title="WiDS'25"
       category="TRADING ALGORITHM"
@@ -134,7 +103,6 @@ const ProjectsGrid: React.FC = () => {
     />,
     <ProjectCard
       key="instigpt"
-      index={5}
       href="/projects/instigpt"
       title="InstiGPT"
       category="AIC NLP PROJECT"
@@ -144,7 +112,6 @@ const ProjectsGrid: React.FC = () => {
     />,
     <ProjectCard
       key="karyogram"
-      index={6}
       href="/projects/karyogram"
       title="Karyogram"
       category="MEDICAL IMAGING PROJECT"
@@ -156,7 +123,7 @@ const ProjectsGrid: React.FC = () => {
   return (
     <div className="w-full bg-[#111111] py-4 pt-2">
       <div className="max-w-5xl mx-auto px-5">
-        <SectionReveal className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5">
+        <SectionReveal className="columns-1 sm:columns-2 md:columns-2 gap-4 group/grid" itemClassName="break-inside-avoid">
           {projectCards}
           {/* Add more ProjectCard components as needed */}
         </SectionReveal>

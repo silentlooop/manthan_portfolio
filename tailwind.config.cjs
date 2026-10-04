@@ -37,9 +37,7 @@ module.exports = {
         "fade-in-up": "fadeInUp 0.6s ease-out forwards",
       },
       fontFamily: {
-        mono: ['"Geist Mono"', "SF Mono", "Menlo", "Monaco", "Consolas", "Liberation Mono", "Courier New", "monospace"],
-        geist: ['Geist', 'Inter', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
-        sfmono: ['"Geist Mono"', "SF Mono", "Space Mono", "Menlo", "Monaco", "Consolas", "Liberation Mono", "Courier New", 'monospace'],
+        sfmono: ["SF Mono", "Space Mono", "Menlo", "Monaco", "Consolas", "Liberation Mono", "Courier New", 'monospace'],
         helvetica: ['Helvetica', 'Arial', 'sans-serif'],
         sfpro: ['"SF Pro Display"', '"SF Pro Text"', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
         spacegrotesk: ['"Space Grotesk"', 'Inter', 'system-ui', 'Arial', 'sans-serif'],

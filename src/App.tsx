@@ -66,7 +66,7 @@ function App() {
         {/* Projects */}
         <div id="work" className="z-15 w-full">
           <div className="w-full px-5 mt-4 max-w-5xl mx-auto">
-            <SectionPrompt command="cd ./selected-work" index="02" meta="selected work · 06" className="mb-6" />
+            <SectionPrompt command="cd ./selected-work" className="mb-6" />
           </div>
           <ProjectsGrid />
         </div>
@@ -78,19 +78,19 @@ function App() {
           <footer className="flex flex-col items-center body bg-[#1C1C1C] dot-grid z-[1] w-full sticky bottom-0 text-zinc-100 font-sfmono">
             <section className="w-full max-w-8xl relative z-10 pb-6 pt-6 px-3" style={{ opacity: 1 }}>
               <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 font-sfmono text-[14px] leading-none">
-                <span className="flex flex-row flex-wrap items-center gap-2">
+                <span className="flex flex-row items-center gap-2">
                   <p className="self-center w-min px-2 pt-1 pb-[2px] font-sfmono lowercase text-zinc-400 border-zinc-400 border border-solid rounded-full">v5.0.0</p>
                   <p className="self-center px-2 pt-1 pb-[2px] font-sfmono uppercase text-zinc-500">updated 2026.08</p>
                   <button
                     type="button"
                     onClick={() => window.dispatchEvent(new Event(OPEN_TERMINAL_EVENT))}
-                    className="relative hidden self-center whitespace-nowrap px-2 pt-1 pb-[2px] font-sfmono lowercase text-zinc-500 transition-colors hover:text-[#fde047] sm:inline-block"
+                    className="relative self-center px-2 pt-1 pb-[2px] font-sfmono lowercase text-zinc-500 transition-colors hover:text-[#fde047]"
                   >
                     <kbd className="mr-1.5 rounded border border-zinc-700 px-1 text-[11px] text-zinc-400">/</kbd>open terminal
                     <TerminalHint text="$ help" placement="below" className="!top-auto bottom-full mb-2 !mt-0" />
                   </button>
                 </span>
-                <span className="flex w-full items-center gap-2 text-xs uppercase tracking-wider text-zinc-600 sm:ml-auto sm:w-auto sm:text-right">
+                <span className="ml-auto flex items-center gap-2 text-right text-xs uppercase tracking-wider text-zinc-600">
                   <span>built + designed by</span>
                   <span className="text-zinc-400">manthan</span>
                   <span className="text-[#fde047]">/ silentlooop</span>

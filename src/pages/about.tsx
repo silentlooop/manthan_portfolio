@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence, useScroll, useSpring, useTransform } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
 import type { Variants } from "framer-motion";
 import { SectionPrompt, SectionReveal } from "../components/ui/terminal-effects";
 import { TerminalHint } from "../components/ui/terminal-hint";
@@ -201,14 +201,8 @@ const linkVariants = {
 // --- NAVIGATION COMPONENT ---
 function NavBar() {
     const [isOpen, setIsOpen] = useState(false);
-    const { scrollY, scrollYProgress } = useScroll();
+    const { scrollYProgress } = useScroll();
     const scrollProgress = useSpring(scrollYProgress, { stiffness: 200, damping: 30, restDelta: 0.001 });
-    // Hide the progress line at the top (and on pages too short to scroll).
-    const scrollProgressOpacity = useTransform(scrollY, [0, 40], [0, 1]);
-    const pathname = typeof window !== "undefined" ? window.location.pathname : "/";
-    const navLinkClass = (active: boolean) =>
-        `relative transition-colors cursor-pointer ${active ? "text-white" : "hover:text-white"}`;
-    const activeDot = <span aria-hidden="true" className="absolute -left-2.5 top-1/2 h-1 w-1 -translate-y-1/2 rounded-full bg-[#fde047]" />;
 
     // Lock body scroll when menu is open
     useEffect(() => {
@@ -231,7 +225,7 @@ function NavBar() {
 
     return (
         <>
-            <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-5 py-3 md:px-6 md:py-4 bg-[#111111]/80 backdrop-blur-md border-b border-white/5 transition-all duration-300">
+            <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-5 py-3 md:px-6 md:py-4 bg-[#111111] border-b border-white/5 transition-all duration-300">
                 {/* Logo */}
                 <a href="/" className="text-white font-sfmono text-base md:text-lg font-bold tracking-tight hover:opacity-80 transition-opacity z-50 relative">
                     silentlooop<span className="terminal-cursor text-zinc-500">_</span>
@@ -240,16 +234,13 @@ function NavBar() {
 
                 {/* Desktop Links */}
                 <div className="hidden md:flex items-center gap-8 text-sm font-sfmono text-gray-400">
-                    <a href="/#work" onClick={(e) => scrollToSection(e, 'work')} className={navLinkClass(false)}>work<TerminalHint text="$ ls ./proof-i-dont-just-talk" placement="below" /></a>
-                    <a href="/blogs" aria-current={pathname === "/blogs" ? "page" : undefined} className={navLinkClass(pathname === "/blogs")}>{pathname === "/blogs" && activeDot}blogs<TerminalHint text="$ cat ./thoughts --uncompiled" placement="below" /></a>
-                    <a href="/shaped" aria-current={pathname === "/shaped" ? "page" : undefined} className={navLinkClass(pathname === "/shaped")}>{pathname === "/shaped" && activeDot}~/me<TerminalHint text="$ whoami --the-human-behind-it" placement="below" /></a>
+                    <a href="/#work" onClick={(e) => scrollToSection(e, 'work')} className="relative hover:text-white transition-colors cursor-pointer">work<TerminalHint text="$ ls ./proof-i-dont-just-talk" placement="below" /></a>
+                    <a href="/blogs" className="relative hover:text-white transition-colors cursor-pointer">blogs<TerminalHint text="$ cat ./thoughts --uncompiled" placement="below" /></a>
+                    <a href="/shaped" className="relative hover:text-white transition-colors cursor-pointer">~/me<TerminalHint text="$ whoami --the-human-behind-it" placement="below" /></a>
                 </div>
 
                 {/* Mobile Menu Toggle (Hamburger / Close) */}
                 <button
-                    type="button"
-                    aria-label={isOpen ? "Close menu" : "Open menu"}
-                    aria-expanded={isOpen}
                     onClick={() => setIsOpen(!isOpen)}
                     className="md:hidden text-white text-xl z-50 relative focus:outline-none"
                 >
@@ -257,7 +248,7 @@ function NavBar() {
                 </button>
 
                 {/* Scroll progress */}
-                <motion.div aria-hidden="true" className="absolute bottom-0 left-0 right-0 h-px origin-left bg-zinc-500/60" style={{ scaleX: scrollProgress, opacity: scrollProgressOpacity }} />
+                <motion.div aria-hidden="true" className="absolute bottom-0 left-0 right-0 h-px origin-left bg-zinc-500/60" style={{ scaleX: scrollProgress }} />
             </nav>
 
             {/* FULL SCREEN MOBILE MENU OVERLAY */}
@@ -418,8 +409,8 @@ function About() {
                     {/* Trajectory Section */}
                     <section className="min-h-[100dvh] flex flex-col justify-center py-24 md:py-28">
                         <div className="overflow-hidden rounded-md border border-white/10 bg-[#141414] shadow-2xl shadow-black/20">
-                            <div role="tablist" aria-label="Portfolio views" className="flex min-w-0 items-end gap-1 border-b border-white/10 bg-[#111111] px-2 pt-2 sm:gap-3 md:px-5">
-                                <div className="hidden shrink-0 items-center gap-2 px-2 pb-3 sm:flex">
+                            <div role="tablist" aria-label="Portfolio views" className="flex min-w-0 items-end gap-3 border-b border-white/10 bg-[#111111] px-2 pt-2 md:px-5">
+                                <div className="flex shrink-0 items-center gap-2 px-2 pb-3">
                                     <span className="h-2.5 w-2.5 rounded-full bg-red-500" />
                                     <span className="h-2.5 w-2.5 rounded-full bg-yellow-500" />
                                     <span className="h-2.5 w-2.5 rounded-full bg-green-500" />
@@ -431,7 +422,7 @@ function About() {
                                     onClick={() => setActiveTab("trajectory")}
                                     className={`relative z-10 flex min-w-0 flex-1 items-center rounded-t-md border-x border-t px-2 py-2 text-left text-[11px] leading-tight transition-colors md:px-5 md:text-xs ${activeTab === "trajectory" ? "-mb-px border-white/10 bg-[#181818] text-zinc-300" : "border-transparent bg-[#111111] text-zinc-600 hover:text-zinc-400"}`}
                                 >
-                                    <span className="truncate"><span className="sm:hidden">trajectory</span><span className="hidden sm:inline">{command}</span></span>
+                                    <span className="truncate">{command}</span>
                                     <TerminalHint text="$ cat ./how-i-got-here.log" placement="below-start" />
                                 </button>
                                 <button
@@ -441,7 +432,7 @@ function About() {
                                     onClick={() => setActiveTab("contact")}
                                     className={`relative z-10 flex min-w-0 flex-1 items-center rounded-t-md border-x border-t px-2 py-2 text-left text-[11px] leading-tight transition-colors md:px-5 md:text-xs ${activeTab === "contact" ? "-mb-px border-white/10 bg-[#181818] text-zinc-300" : "border-transparent bg-[#111111] text-zinc-600 hover:text-zinc-400"}`}
                                 >
-                                    <span className="truncate"><span className="sm:hidden">contact</span><span className="hidden sm:inline">cat contact.txt</span></span>
+                                    <span className="truncate">cat contact.txt</span>
                                     <TerminalHint text="$ ping manthan --say-hi" placement="below-start" />
                                 </button>
                                 <button
@@ -451,7 +442,7 @@ function About() {
                                     onClick={() => setActiveTab("tech-lab")}
                                     className={`relative z-10 flex min-w-0 flex-1 items-center rounded-t-md border-x border-t px-2 py-2 text-left text-[11px] leading-tight transition-colors md:px-5 md:text-xs ${activeTab === "tech-lab" ? "-mb-px border-white/10 bg-[#181818] text-zinc-300" : "border-transparent bg-[#111111] text-zinc-600 hover:text-zinc-400"}`}
                                 >
-                                    <span className="truncate"><span className="sm:hidden">lab</span><span className="hidden sm:inline">tech-lab.txt</span></span>
+                                    <span className="truncate">tech-lab.txt</span>
                                     <TerminalHint text="$ ./break-things --on-purpose" placement="below-start" />
                                 </button>
                             </div>
@@ -502,7 +493,7 @@ function About() {
 
                     {/* Terminal-style Experience Section */}
                     <div className="mt-2 mb-6">
-                        <SectionPrompt command="cd ./deep-dive/experience" index="01" meta="experience" className="mb-8" startOnMount />
+                        <SectionPrompt command="cd ./deep-dive/experience" className="mb-8" startOnMount />
                         <TerminalExperience />
                     </div>
                 </div>
