@@ -5,6 +5,7 @@ import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
 import type { Variants } from "framer-motion";
 import { SectionPrompt, SectionReveal } from "../components/ui/terminal-effects";
 import { TerminalHint } from "../components/ui/terminal-hint";
+import { Arrow, Measure, MeasureVertical, Note, RegMark, Signature } from "../components/ui/annotations";
 
 // --- HELPERS ---
 
@@ -360,10 +361,6 @@ function About() {
                 { text: " I'm deep in diffusion models, watching structure emerge from pure noise, one denoising step at a time. Honestly, not a bad metaphor for figuring life out either." }
             ]
         },
-        {
-            className: "pt-3 text-gray-500 text-right text-xs",
-            chunks: [{ text: "- manthan" }]
-        },
     ];
 
     const segmentLengths = trajectorySegments.map((segment) => typedLength(segment.chunks));
@@ -407,8 +404,25 @@ function About() {
 
                 <div className="w-full px-5 max-w-5xl mx-auto">
                     {/* Trajectory Section */}
-                    <section className="min-h-[100dvh] flex flex-col justify-center py-24 md:py-28">
-                        <div className="overflow-hidden rounded-md border border-white/10 bg-[#141414] shadow-2xl shadow-black/20">
+                    <section className="relative min-h-[100dvh] flex flex-col justify-center py-24 md:py-28">
+                        <div className="relative">
+                        {/* Annotations: proof marks + margin notes */}
+                        <div aria-hidden="true" className="pointer-events-none absolute -top-9 inset-x-0 hidden items-center gap-3 md:flex">
+                            <span className="font-sfmono text-[10px] text-zinc-600">01</span>
+                            <Measure className="flex-1" label="984 × 640" note="fig. 01 — the trajectory" />
+                        </div>
+                        <RegMark className="pointer-events-none absolute -left-7 -top-7 hidden md:block" />
+                        <RegMark className="pointer-events-none absolute -bottom-7 -right-7 hidden md:block" />
+                        <div aria-hidden="true" className="pointer-events-none absolute right-full top-14 mr-4 hidden w-40 xl:block">
+                            <Note rotate={-8} className="pl-2">who wrote this?</Note>
+                            <Arrow variant="swoop" className="ml-10 mt-1 h-14 w-24" rotate={6} />
+                        </div>
+                        <div aria-hidden="true" className="pointer-events-none absolute bottom-10 left-full ml-4 hidden w-44 xl:block">
+                            <Arrow variant="hook" flip className="h-14 w-14" rotate={-20} />
+                            <Note rotate={5} size="sm" className="mt-1">still figuring it out… and probably always will.</Note>
+                        </div>
+
+                        <div className="relative z-10 overflow-hidden rounded-md border border-white/10 bg-[#141414] shadow-2xl shadow-black/20">
                             <div role="tablist" aria-label="Portfolio views" className="flex min-w-0 items-end gap-3 border-b border-white/10 bg-[#111111] px-2 pt-2 md:px-5">
                                 <div className="flex shrink-0 items-center gap-2 px-2 pb-3">
                                     <span className="h-2.5 w-2.5 rounded-full bg-red-500" />
@@ -483,16 +497,36 @@ function About() {
                                     </div>
                                 </div>
 
-                                <div className="mt-12 flex flex-wrap items-center justify-between gap-3 border-t border-white/5 pt-5 font-mono text-xs text-zinc-600">
+                                {/* Hand-signed sign-off; space is reserved so nothing jumps when it draws in */}
+                                <div aria-hidden="true" className="flex h-24 items-end justify-end">
+                                    {typedUnits >= totalUnits && (
+                                        <div className="text-right">
+                                            <Signature className="ml-auto h-12 w-36" />
+                                            <Note rotate={-2} size="sm" ink="faint">
+                                                — manthan, {new Date().toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })}. still compiling.
+                                            </Note>
+                                        </div>
+                                    )}
+                                </div>
+
+                                <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-white/5 pt-5 font-mono text-xs text-zinc-600">
                                     <span>status: <span className="text-[#fde047]">online</span></span>
                                     <span>process: trajectory_initialized</span>
                                 </div>
                             </SectionReveal> : activeTab === "contact" ? <ContactTerminal /> : <TechLabTerminal />}
                         </div>
+                        </div>
                     </section>
 
                     {/* Terminal-style Experience Section */}
-                    <div className="mt-2 mb-6">
+                    <div className="relative mt-2 mb-6">
+                        <div aria-hidden="true" className="pointer-events-none absolute bottom-2 right-full top-20 mr-6 hidden xl:flex">
+                            <MeasureVertical label="2025 — 2026" />
+                        </div>
+                        <div aria-hidden="true" className="pointer-events-none absolute left-full top-24 ml-4 hidden w-44 xl:block">
+                            <Note rotate={-5}>same guy, more commits now.</Note>
+                            <Arrow variant="swoop" flip className="mt-1 h-12 w-24" rotate={12} delay={0.4} />
+                        </div>
                         <SectionPrompt command="cd ./deep-dive/experience" className="mb-8" startOnMount />
                         <TerminalExperience />
                     </div>

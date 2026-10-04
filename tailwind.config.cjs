@@ -37,6 +37,7 @@ module.exports = {
         "fade-in-up": "fadeInUp 0.6s ease-out forwards",
       },
       fontFamily: {
+        hand: ['Caveat', '"Bradley Hand"', 'cursive'],
         sfmono: ["SF Mono", "Space Mono", "Menlo", "Monaco", "Consolas", "Liberation Mono", "Courier New", 'monospace'],
         helvetica: ['Helvetica', 'Arial', 'sans-serif'],
         sfpro: ['"SF Pro Display"', '"SF Pro Text"', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
