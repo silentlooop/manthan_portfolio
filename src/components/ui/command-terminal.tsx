@@ -28,16 +28,9 @@ const HELP = [
     "  whoami | date | echo <text> | history | clear | exit",
 ];
 
-// Show the tip on every refresh and on arrival from outside the site,
-// but not when moving between pages via the site's own (full-reload) links.
+// The tip notification only appears on the home page; every other page gets the launcher icon straight away.
 function shouldShowTip() {
-    const nav = performance.getEntriesByType("navigation")[0] as PerformanceNavigationTiming | undefined;
-    if (nav?.type === "reload") return true;
-    try {
-        return !document.referrer || new URL(document.referrer).origin !== window.location.origin;
-    } catch {
-        return true;
-    }
+    return window.location.pathname === "/";
 }
 
 const WELCOME: Line[] = [
