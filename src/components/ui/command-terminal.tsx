@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { projects } from "../../data/projects";
+import { TerminalHint } from "./terminal-hint";
 
 // Fire this from anywhere to open the terminal, e.g. a footer button.
 export const OPEN_TERMINAL_EVENT = "open-command-terminal";
@@ -61,6 +62,8 @@ export function CommandTerminal() {
     const scrollRef = useRef<HTMLDivElement>(null);
 
     const [showTip, setShowTip] = useState(false);
+    // Persistent launcher appears once the tip has had its moment (immediately for returning visitors).
+    const [launcherReady, setLauncherReady] = useState(readTipSeen);
     const isTouch = typeof window !== "undefined" && window.matchMedia("(hover: none)").matches;
 
     const close = useCallback(() => setOpen(false), []);
@@ -70,6 +73,7 @@ export function CommandTerminal() {
         if (readTipSeen()) return;
         const showTimer = window.setTimeout(() => {
             setShowTip(true);
+            setLauncherReady(true);
             markTipSeen();
         }, 2500);
         const hideTimer = window.setTimeout(() => setShowTip(false), 14000);
@@ -277,6 +281,23 @@ export function CommandTerminal() {
                         />
                     </div>
                 </motion.div>
+            )}
+        </AnimatePresence>
+        <AnimatePresence>
+            {launcherReady && !showTip && !open && (
+                <motion.button
+                    type="button"
+                    onClick={() => setOpen(true)}
+                    aria-label="Open terminal"
+                    className="fixed right-0 top-1/2 z-[55] rounded-l-md border border-r-0 border-white/10 bg-[#141414]/90 px-2 py-2.5 font-sfmono text-[11px] leading-none text-zinc-500 shadow-lg shadow-black/40 backdrop-blur-sm transition-colors hover:bg-[#1a1a1a] hover:text-zinc-200"
+                    initial={{ opacity: 0, x: 12, y: "-50%" }}
+                    animate={{ opacity: 1, x: 0, y: "-50%" }}
+                    exit={{ opacity: 0, x: 12, y: "-50%" }}
+                    transition={{ duration: 0.3, ease: "easeOut" }}
+                >
+                    &gt;<span className="terminal-cursor">_</span>
+                    <TerminalHint text="$ ./terminal --open" placement="below-start" className="!left-auto right-full mr-2 !top-1/2 !mt-0 -translate-y-1/2" />
+                </motion.button>
             )}
         </AnimatePresence>
         <AnimatePresence>
