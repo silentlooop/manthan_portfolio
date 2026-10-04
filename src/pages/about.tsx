@@ -228,7 +228,7 @@ function NavBar() {
             <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-5 py-3 md:px-6 md:py-4 bg-[#111111] border-b border-white/5 transition-all duration-300">
                 {/* Logo */}
                 <a href="/" className="text-white font-sfmono text-base md:text-lg font-bold tracking-tight hover:opacity-80 transition-opacity z-50 relative">
-                    silentlooop<span className="terminal-cursor text-[#fde047]">_</span>
+                    silentlooop<span className="terminal-cursor text-zinc-500">_</span>
                     <TerminalHint text="$ cd ~/home-sweet-home" placement="below" />
                 </a>
 
@@ -248,7 +248,7 @@ function NavBar() {
                 </button>
 
                 {/* Scroll progress */}
-                <motion.div aria-hidden="true" className="absolute bottom-0 left-0 right-0 h-px origin-left bg-[#fde047]/70" style={{ scaleX: scrollProgress }} />
+                <motion.div aria-hidden="true" className="absolute bottom-0 left-0 right-0 h-px origin-left bg-zinc-500/60" style={{ scaleX: scrollProgress }} />
             </nav>
 
             {/* FULL SCREEN MOBILE MENU OVERLAY */}

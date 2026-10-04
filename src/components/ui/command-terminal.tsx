@@ -27,6 +27,24 @@ const HELP = [
     "  whoami | date | echo <text> | history | clear | exit",
 ];
 
+const TIP_SEEN_KEY = "silentlooop:terminal-tip-seen";
+
+function readTipSeen() {
+    try {
+        return window.localStorage.getItem(TIP_SEEN_KEY) === "1";
+    } catch {
+        return false;
+    }
+}
+
+function markTipSeen() {
+    try {
+        window.localStorage.setItem(TIP_SEEN_KEY, "1");
+    } catch {
+        // storage unavailable (private mode etc.) — the tip just shows again next visit
+    }
+}
+
 const WELCOME: Line[] = [
     { kind: "output", text: "welcome to silentlooop shell (zsh-ish 5.0.0)" },
     { kind: "output", text: "type 'help' to see what i can do." },
@@ -42,7 +60,28 @@ export function CommandTerminal() {
     const inputRef = useRef<HTMLInputElement>(null);
     const scrollRef = useRef<HTMLDivElement>(null);
 
+    const [showTip, setShowTip] = useState(false);
+    const isTouch = typeof window !== "undefined" && window.matchMedia("(hover: none)").matches;
+
     const close = useCallback(() => setOpen(false), []);
+
+    // First-visit tip so people discover the terminal; shown once, then remembered.
+    useEffect(() => {
+        if (readTipSeen()) return;
+        const showTimer = window.setTimeout(() => {
+            setShowTip(true);
+            markTipSeen();
+        }, 2500);
+        const hideTimer = window.setTimeout(() => setShowTip(false), 14000);
+        return () => {
+            window.clearTimeout(showTimer);
+            window.clearTimeout(hideTimer);
+        };
+    }, []);
+
+    useEffect(() => {
+        if (open) setShowTip(false);
+    }, [open]);
 
     // Global shortcuts: "/" or Cmd/Ctrl+K opens, Esc closes.
     useEffect(() => {
@@ -184,6 +223,62 @@ export function CommandTerminal() {
     };
 
     return (
+        <>
+        <AnimatePresence>
+            {showTip && !open && (
+                <motion.div
+                    className="fixed bottom-5 right-5 z-[55] max-w-[calc(100vw-2.5rem)] font-sfmono"
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 8 }}
+                    transition={{ duration: 0.35, ease: "easeOut" }}
+                >
+                    <div className="group relative overflow-hidden rounded-md border border-white/10 bg-[#141414]/95 shadow-2xl shadow-black/50 backdrop-blur-sm">
+                        <div className="flex items-center gap-1.5 border-b border-white/5 bg-[#111111] px-3 py-2">
+                            <span className="h-2 w-2 rounded-full bg-zinc-700" />
+                            <span className="h-2 w-2 rounded-full bg-zinc-700" />
+                            <span className="h-2 w-2 rounded-full bg-zinc-700" />
+                            <span className="ml-2 text-[10px] uppercase tracking-wider text-zinc-600">tip</span>
+                            <button
+                                type="button"
+                                aria-label="Dismiss tip"
+                                onClick={() => setShowTip(false)}
+                                className="ml-auto px-1 text-xs leading-none text-zinc-600 transition-colors hover:text-zinc-300"
+                            >
+                                ✕
+                            </button>
+                        </div>
+                        <button
+                            type="button"
+                            onClick={() => setOpen(true)}
+                            className="block w-full px-4 py-3 text-left text-xs leading-relaxed"
+                        >
+                            <span className="block text-zinc-400">
+                                <span className="text-zinc-600">$ </span>psst. this site has a real terminal.
+                            </span>
+                            <span className="mt-1 block text-zinc-500 transition-colors group-hover:text-zinc-300">
+                                {isTouch ? (
+                                    "tap here to try it"
+                                ) : (
+                                    <>
+                                        press <kbd className="rounded border border-zinc-700 px-1 text-[11px] text-zinc-300">/</kbd> or{" "}
+                                        <kbd className="rounded border border-zinc-700 px-1 text-[11px] text-zinc-300">⌘K</kbd> to try it
+                                    </>
+                                )}
+                                <span className="terminal-cursor ml-1 text-zinc-500">_</span>
+                            </span>
+                        </button>
+                        <motion.span
+                            aria-hidden="true"
+                            className="absolute bottom-0 left-0 h-px w-full origin-left bg-zinc-600"
+                            initial={{ scaleX: 1 }}
+                            animate={{ scaleX: 0 }}
+                            transition={{ duration: 11.5, ease: "linear" }}
+                        />
+                    </div>
+                </motion.div>
+            )}
+        </AnimatePresence>
         <AnimatePresence>
             {open && (
                 <motion.div
@@ -246,5 +341,6 @@ export function CommandTerminal() {
                 </motion.div>
             )}
         </AnimatePresence>
+        </>
     );
 }
